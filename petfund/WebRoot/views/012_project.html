@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!--	<style>
+    .img_box_big img{
+    	width: 100%;    	
+    	cursor: pointer;
+    }
+    </style>-->
+
+
+</head>
+<body>
+
+<div class="container qz_content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="row">
+				<div class="news_box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="thumbnail">
+						<div class="row">
+							<div class="news_box col-xs-12 col-sm-12 col-md-5 col-lg-5">
+								<div class="img_box_big">
+									<img src="{{projectChildItems.fileurl}}" alt="..." width="100%">
+								</div>
+							</div>
+							
+							<div class="news_box col-xs-12 col-sm-12 col-md-7 col-lg-7">
+								<div class="progress">
+								  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{(projectChildItems.needMoney/projectChildItems.targetMoney)*100}}%">
+								    <span class="wcb">{{(projectChildItems.moneyOff/projectChildItems.money)*100 | number:1}}%</span>
+								  </div>
+								</div>
+						      
+						      	<div class="caption">
+						        	<h3 ng-bind="projectChildItems.title"></h3>
+						        	<div class="caption_p">
+							        	<p ng-if="type==1">
+							        		<span ng-bind="projectChildItems.childName"></span>，
+											<span ng-if="projectChildItems.sex==1">男</span>
+											<span ng-if="projectChildItems.sex==2">女</span>,
+							        		<span ng-bind="projectChildItems.age"></span>岁，
+							        		<span ng-bind="projectChildItems.cityNum"></span>
+							        	</p>
+							        	<p>目标： <span class="orange_text" ng-bind="projectChildItems.money"></span>元</p>
+							        	<p>还需： <span class="orange_text" ng-bind="projectChildItems.money-projectChildItems.moneyOff"></span>元</p>
+							        	<p>累计捐款 ：<span ng-bind="projectChildItems.total"></span>人次</p>
+							        	<span class="fqr_btn">
+							        		发起人 ：<span ng-bind="projectChildItems.personName"></span>
+							        		(总共发起<span ng-bind="projectChildItems.initiateNum"></span>个项目)
+							        	</span>
+						        	</div>
+						        	<a ui-sref="contribute" class="btn btn-success" role="button"  ng-click='jk(projectChildItems.id)'>我要捐款</a>
+					      		</div>
+				    	
+							</div>
+						</div>
+					</div>
+				
+				</div>
+			</div>
+			
+			<div class="row">
+				
+				<div class="news_box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="thumbnail" id="theTab">
+						<div class="news_title">
+							<ul class="nav nav-tabs">
+								<li role="presentation" class="active"><a href="#info1" data-toggle="tab">介绍</a></li>
+								<li role="presentation"><a href="#info2" data-toggle="tab" ng-show="type==1">病例</a></li>
+								<li role="presentation"><a href="#info3" data-toggle="tab" ng-show="type==1">父母感言</a></li>
+							</ul>
+						</div>
+							
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="info1" ng-bind-html="projectChildItems.content">
+
+							</div>
+							<div class="tab-pane fade" id="info2" ng-bind-html="projectChildItems.caseInfo">
+
+							</div>
+							<div class="tab-pane fade" id="info3" ng-bind-html="projectChildItems.thanks">
+
+							</div>
+							
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			
+		</div>
+  	</div>
+	
+	
+</div>
+<script>
+	$('#theTab a').click(function (e) {
+		e.preventDefault() //组织a连接的原跳转行为，否则会和路由冲突
+		$(this).tab('show')
+	});
+</script>
+
+</body>
+</html>

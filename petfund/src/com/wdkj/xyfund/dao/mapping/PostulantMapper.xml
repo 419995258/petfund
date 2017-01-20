@@ -1,0 +1,697 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wdkj.xyfund.dao.PostulantMapper" >
+  <resultMap id="BaseResultMap" type="com.wdkj.xyfund.entity.Postulant" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="id_number" property="idNumber" jdbcType="VARCHAR" />
+    <result column="id_type" property="idType" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="zzmm" property="zzmm" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="VARCHAR" />
+    <result column="profession_type" property="professionType" jdbcType="VARCHAR" />
+    <result column="profession" property="profession" jdbcType="VARCHAR" />
+    <result column="c_language" property="cLanguage" jdbcType="VARCHAR" />
+    <result column="e_language" property="eLanguage" jdbcType="VARCHAR" />
+    <result column="e_language_level" property="eLanguageLevel" jdbcType="VARCHAR" />
+    <result column="blood_group" property="bloodGroup" jdbcType="INTEGER" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="zone" property="zone" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="zip_code" property="zipCode" jdbcType="VARCHAR" />
+    <result column="telephone" property="telephone" jdbcType="VARCHAR" />
+    <result column="other_tel" property="otherTel" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="unit_trade_type" property="unitTradeType" jdbcType="VARCHAR" />
+    <result column="unit_type" property="unitType" jdbcType="VARCHAR" />
+    <result column="service_area" property="serviceArea" jdbcType="VARCHAR" />
+    <result column="service_object" property="serviceObject" jdbcType="VARCHAR" />
+    <result column="is_service_date" property="isServiceDate" jdbcType="DATE" />
+    <result column="service_date" property="serviceDate" jdbcType="DATE" />
+    <result column="training_date" property="trainingDate" jdbcType="DATE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, id_number, id_type, tel, birthday, country, nation, zzmm, school, level, 
+    profession_type, profession, c_language, e_language, e_language_level, blood_group, 
+    native_place, zone, address, zip_code, telephone, other_tel, title, unit, unit_trade_type, 
+    unit_type, service_area, service_object, is_service_date, service_date, training_date, 
+    status, sex, user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wdkj.xyfund.entity.PostulantExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_postulant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_postulant
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_postulant
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wdkj.xyfund.entity.PostulantExample" >
+    delete from t_postulant
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wdkj.xyfund.entity.Postulant" useGeneratedKeys="true" keyProperty="id">
+    insert into t_postulant (name, id_number, 
+      id_type, tel, birthday, 
+      country, nation, zzmm, 
+      school, level, profession_type, 
+      profession, c_language, e_language, 
+      e_language_level, blood_group, native_place, 
+      zone, address, zip_code, 
+      telephone, other_tel, title, 
+      unit, unit_trade_type, unit_type, 
+      service_area, service_object, is_service_date, 
+      service_date, training_date, status, 
+      sex, user_id)
+    values (#{name,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{idType,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{country,jdbcType=VARCHAR}, #{nation,jdbcType=VARCHAR}, #{zzmm,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{level,jdbcType=VARCHAR}, #{professionType,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{cLanguage,jdbcType=VARCHAR}, #{eLanguage,jdbcType=VARCHAR}, 
+      #{eLanguageLevel,jdbcType=VARCHAR}, #{bloodGroup,jdbcType=INTEGER}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{zone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{zipCode,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{otherTel,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{unitTradeType,jdbcType=VARCHAR}, #{unitType,jdbcType=VARCHAR}, 
+      #{serviceArea,jdbcType=VARCHAR}, #{serviceObject,jdbcType=VARCHAR}, #{isServiceDate,jdbcType=DATE}, 
+      #{serviceDate,jdbcType=DATE}, #{trainingDate,jdbcType=DATE}, #{status,jdbcType=INTEGER}, 
+      #{sex,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wdkj.xyfund.entity.Postulant" useGeneratedKeys="true" keyProperty="id">
+    insert into t_postulant
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+     
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="idNumber != null" >
+        id_number,
+      </if>
+      <if test="idType != null" >
+        id_type,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="zzmm != null" >
+        zzmm,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="professionType != null" >
+        profession_type,
+      </if>
+      <if test="profession != null" >
+        profession,
+      </if>
+      <if test="cLanguage != null" >
+        c_language,
+      </if>
+      <if test="eLanguage != null" >
+        e_language,
+      </if>
+      <if test="eLanguageLevel != null" >
+        e_language_level,
+      </if>
+      <if test="bloodGroup != null" >
+        blood_group,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="zone != null" >
+        zone,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="zipCode != null" >
+        zip_code,
+      </if>
+      <if test="telephone != null" >
+        telephone,
+      </if>
+      <if test="otherTel != null" >
+        other_tel,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="unit != null" >
+        unit,
+      </if>
+      <if test="unitTradeType != null" >
+        unit_trade_type,
+      </if>
+      <if test="unitType != null" >
+        unit_type,
+      </if>
+      <if test="serviceArea != null" >
+        service_area,
+      </if>
+      <if test="serviceObject != null" >
+        service_object,
+      </if>
+      <if test="isServiceDate != null" >
+        is_service_date,
+      </if>
+      <if test="serviceDate != null" >
+        service_date,
+      </if>
+      <if test="trainingDate != null" >
+        training_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmm != null" >
+        #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="professionType != null" >
+        #{professionType,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="cLanguage != null" >
+        #{cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="eLanguage != null" >
+        #{eLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="eLanguageLevel != null" >
+        #{eLanguageLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodGroup != null" >
+        #{bloodGroup,jdbcType=INTEGER},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="otherTel != null" >
+        #{otherTel,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitTradeType != null" >
+        #{unitTradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceArea != null" >
+        #{serviceArea,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceObject != null" >
+        #{serviceObject,jdbcType=VARCHAR},
+      </if>
+      <if test="isServiceDate != null" >
+        #{isServiceDate,jdbcType=DATE},
+      </if>
+      <if test="serviceDate != null" >
+        #{serviceDate,jdbcType=DATE},
+      </if>
+      <if test="trainingDate != null" >
+        #{trainingDate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_postulant
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNumber != null" >
+        id_number = #{record.idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idType != null" >
+        id_type = #{record.idType,jdbcType=INTEGER},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.country != null" >
+        country = #{record.country,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zzmm != null" >
+        zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.school != null" >
+        school = #{record.school,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=VARCHAR},
+      </if>
+      <if test="record.professionType != null" >
+        profession_type = #{record.professionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.profession != null" >
+        profession = #{record.profession,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cLanguage != null" >
+        c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eLanguage != null" >
+        e_language = #{record.eLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eLanguageLevel != null" >
+        e_language_level = #{record.eLanguageLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodGroup != null" >
+        blood_group = #{record.bloodGroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zone != null" >
+        zone = #{record.zone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zipCode != null" >
+        zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.telephone != null" >
+        telephone = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.otherTel != null" >
+        other_tel = #{record.otherTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unit != null" >
+        unit = #{record.unit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitTradeType != null" >
+        unit_trade_type = #{record.unitTradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unitType != null" >
+        unit_type = #{record.unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceArea != null" >
+        service_area = #{record.serviceArea,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceObject != null" >
+        service_object = #{record.serviceObject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isServiceDate != null" >
+        is_service_date = #{record.isServiceDate,jdbcType=DATE},
+      </if>
+      <if test="record.serviceDate != null" >
+        service_date = #{record.serviceDate,jdbcType=DATE},
+      </if>
+      <if test="record.trainingDate != null" >
+        training_date = #{record.trainingDate,jdbcType=DATE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_postulant
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      id_number = #{record.idNumber,jdbcType=VARCHAR},
+      id_type = #{record.idType,jdbcType=INTEGER},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      country = #{record.country,jdbcType=VARCHAR},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      zzmm = #{record.zzmm,jdbcType=VARCHAR},
+      school = #{record.school,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=VARCHAR},
+      profession_type = #{record.professionType,jdbcType=VARCHAR},
+      profession = #{record.profession,jdbcType=VARCHAR},
+      c_language = #{record.cLanguage,jdbcType=VARCHAR},
+      e_language = #{record.eLanguage,jdbcType=VARCHAR},
+      e_language_level = #{record.eLanguageLevel,jdbcType=VARCHAR},
+      blood_group = #{record.bloodGroup,jdbcType=INTEGER},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      zone = #{record.zone,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      zip_code = #{record.zipCode,jdbcType=VARCHAR},
+      telephone = #{record.telephone,jdbcType=VARCHAR},
+      other_tel = #{record.otherTel,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      unit = #{record.unit,jdbcType=VARCHAR},
+      unit_trade_type = #{record.unitTradeType,jdbcType=VARCHAR},
+      unit_type = #{record.unitType,jdbcType=VARCHAR},
+      service_area = #{record.serviceArea,jdbcType=VARCHAR},
+      service_object = #{record.serviceObject,jdbcType=VARCHAR},
+      is_service_date = #{record.isServiceDate,jdbcType=DATE},
+      service_date = #{record.serviceDate,jdbcType=DATE},
+      training_date = #{record.trainingDate,jdbcType=DATE},
+      status = #{record.status,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wdkj.xyfund.entity.Postulant" >
+    update t_postulant
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idNumber != null" >
+        id_number = #{idNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        id_type = #{idType,jdbcType=INTEGER},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="zzmm != null" >
+        zzmm = #{zzmm,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="professionType != null" >
+        profession_type = #{professionType,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null" >
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="cLanguage != null" >
+        c_language = #{cLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="eLanguage != null" >
+        e_language = #{eLanguage,jdbcType=VARCHAR},
+      </if>
+      <if test="eLanguageLevel != null" >
+        e_language_level = #{eLanguageLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodGroup != null" >
+        blood_group = #{bloodGroup,jdbcType=INTEGER},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="zone != null" >
+        zone = #{zone,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="zipCode != null" >
+        zip_code = #{zipCode,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null" >
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="otherTel != null" >
+        other_tel = #{otherTel,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null" >
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="unitTradeType != null" >
+        unit_trade_type = #{unitTradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="unitType != null" >
+        unit_type = #{unitType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceArea != null" >
+        service_area = #{serviceArea,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceObject != null" >
+        service_object = #{serviceObject,jdbcType=VARCHAR},
+      </if>
+      <if test="isServiceDate != null" >
+        is_service_date = #{isServiceDate,jdbcType=DATE},
+      </if>
+      <if test="serviceDate != null" >
+        service_date = #{serviceDate,jdbcType=DATE},
+      </if>
+      <if test="trainingDate != null" >
+        training_date = #{trainingDate,jdbcType=DATE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wdkj.xyfund.entity.Postulant" >
+    update t_postulant
+    set name = #{name,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      id_type = #{idType,jdbcType=INTEGER},
+      tel = #{tel,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      country = #{country,jdbcType=VARCHAR},
+      nation = #{nation,jdbcType=VARCHAR},
+      zzmm = #{zzmm,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      profession_type = #{professionType,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      c_language = #{cLanguage,jdbcType=VARCHAR},
+      e_language = #{eLanguage,jdbcType=VARCHAR},
+      e_language_level = #{eLanguageLevel,jdbcType=VARCHAR},
+      blood_group = #{bloodGroup,jdbcType=INTEGER},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      zone = #{zone,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      zip_code = #{zipCode,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      other_tel = #{otherTel,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      unit_trade_type = #{unitTradeType,jdbcType=VARCHAR},
+      unit_type = #{unitType,jdbcType=VARCHAR},
+      service_area = #{serviceArea,jdbcType=VARCHAR},
+      service_object = #{serviceObject,jdbcType=VARCHAR},
+      is_service_date = #{isServiceDate,jdbcType=DATE},
+      service_date = #{serviceDate,jdbcType=DATE},
+      training_date = #{trainingDate,jdbcType=DATE},
+      status = #{status,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMapSDL" type="com.wdkj.xyfund.controller.vo.PostulantVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="head" property="head" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectVol" resultMap="BaseResultMapSDL">
+  	SELECT 
+	  a.`id`,
+	  a.`name`,
+	  a.`title`,
+	  a.`user_id`,
+	  b.`icon_url` AS `head` 
+	FROM
+	  t_postulant a 
+	  LEFT JOIN t_user b 
+	    ON a.`user_id` = b.`id`  order by a.`id` desc
+  </select>
+</mapper>

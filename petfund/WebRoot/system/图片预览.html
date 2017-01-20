@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>差旅费用报销-云财务</title>
+    
+   
+    <link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+    
+    <link href="../static/css/jquery.fancybox.css" rel="stylesheet" type="text/css"  media="screen" /> <!--预览后的样式-->   
+    
+    <link href="../static/css/style.css" type="text/css" rel="stylesheet" /><!--左右切换样式--> 
+
+    <script type="text/javascript" src="../static/js/lib/jquery/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="../static/js/lib/bootstrap/bootstrap.min.js"></script>    
+    <script type="text/javascript" src="../static/js/lib/jquery/jquery.fancybox.js"></script>
+    
+    
+<!-- 自定义样式 -->
+<link rel="stylesheet" href="../static/css/systemStyle.css">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.fancybox').fancybox();
+        });
+    </script>
+	
+</head>
+
+<body>        
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">							
+				<div class="displayin-bl margincenter positionr fy_lbnr" ng-repeat="x in xqItems.files">
+                    <a class="fancybox" href="../static/img/cs01.jpg" data-fancybox-group="gallery" title="{{x.name}}">
+                        <img class="img-responsive margincenter displayin-bl slt" src="../static/img/cs01.jpg" />
+                        <div class="yingyin positiona text-center">
+                            <img class="margincenter img-responsive fdj_img" src="../static/img/fdj.png" />
+                        </div>
+                    </a>
+               </div>
+               
+               <div class="displayin-bl margincenter positionr fy_lbnr" ng-repeat="x in xqItems.files">
+                    <a class="fancybox" href="../static/img/cs02.jpg" data-fancybox-group="gallery" title="{{x.name}}">
+                        <img class="img-responsive margincenter displayin-bl slt" src="../static/img/cs02.jpg" />
+                        <div class="yingyin positiona text-center">
+                            <img class="margincenter img-responsive fdj_img" src="../static/img/fdj.png" />
+                        </div>
+                    </a>
+               </div>
+               
+               <div class="displayin-bl margincenter positionr fy_lbnr" ng-repeat="x in xqItems.files">
+                    <a class="fancybox" href="../static/img/cs03.jpg" data-fancybox-group="gallery" title="{{x.name}}">
+                        <img class="img-responsive margincenter displayin-bl slt" src="../static/img/cs03.jpg" />
+                        <div class="yingyin positiona text-center">
+                            <img class="margincenter img-responsive fdj_img" src="../static/img/fdj.png" />
+                        </div>
+                    </a>
+               </div>
+			</div>						
+		</div>            
+             
+</body>
+</html>

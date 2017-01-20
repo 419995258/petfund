@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="../static/js/lib/jquery/jquery.form.min.js"></script>
+
+</head>
+<body>
+
+<div class="container qz_content" id="user_info">	
+	
+	<div class="row">		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="user_box">	
+			<form id= "uploadForm" enctype="multipart/form-data">
+				<h3 class="qu_title">我的资料</h3>
+				
+				<ul class="list-group">
+					<!-- <li class="list-group-item use_li" style="line-height: 80px;">
+						<span class="list_left">头像</span>					
+						<span class="list_right"><img ng-src="{{userInfo.iconUrl}}" class="userCenter_head" /></span>
+						<span class="list_right"><input id="upload" name="file"  type="file" /></span>
+					</li> -->
+					<li class="list-group-item use_li">
+						<span class="list_left">账户名(邮箱)(微信)(QQ)</span>
+						<span class="list_right" ng-bind="userInfo.username" style="color: #5c5c5c"></span>
+					</li>
+					<li class="list-group-item use_li">
+						<span class="list_left">真实姓名</span>
+						<input class="list_right_input"  placeholder="{{userInfo.realname}}" ng-model='userInfo.realname' name='realname'/>
+					</li>
+					
+					<li class="list-group-item use_li">
+						<span class="list_left">手机号</span>	
+						<input type="text" class="list_right_input" placeholder="{{userInfo.tel}}" ng-model='userInfo.tel'/>
+					</li>
+					
+					<li class="list-group-item use_li">
+						<span class="list_left">银行卡号</span>
+						<input type="text" class="list_right_input" ng-model='userInfo.cardNumber' placeholder="{{userInfo.cardNumber}}"name='cardNumber'/>
+					</li>
+				</ul>
+				
+				<button style="width: 100%;" type="submit" class="btn btn-success btn-lg" ng-click='saveUserInfo()'>保存修改</button>
+
+				<!-- Modal 删除提醒 -->
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+					<div class="modal-dialog modal-lg" role="document" style="width:400px;">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">&times;</span>
+									<span class="sr-only">Close</span>
+								</button>
+								<h4 class="modal-title" >提示</h4>
+							</div>
+
+							<div class="modal-body">
+								<p>保存成功</p>
+							</div>
+
+							<div class="modal-footer" >
+								<!--<button type="button" class="btn btn-danger" ng-click="choseD()" >确定删除</button>-->
+								<button type="button" class="btn btn-default" onclick="$('#deleteModal').modal('hide');">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</form>
+			<div class="blank_200"></div>
+		</div>		
+		
+	</div>
+</div>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+	 <!-- 时间选择器 -->
+    <link href="../static/css/mobiscroll.core-2.5.2.css" rel="stylesheet" type="text/css" />
+    <link href="../static/css/mobiscroll.animation-2.5.2.css" rel="stylesheet" type="text/css" />
+
+    <script src="../static/js/lib/mobiscroll/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
+    <script src="../static/js/lib/mobiscroll/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
+    <script src="../static/js/lib/mobiscroll/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
+    <script src="../static/js/lib/mobiscroll/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
+    <script src="../static/js/lib/datetime.js" type="text/javascript"></script>
+    <!-- 时间选择器over -->
+    <style>
+        .dw {
+            z-index: 999999999;
+        }
+
+        .dw-persp, .dwo {
+            z-index: 999999999;
+        }
+    </style>
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default">
+			<span class="navbar-brand">公开透明</span>
+
+			<form class="navbar-form navbar-right">
+				<button type="button" class="btn btn-success btn-default" ng-click='openAddNewsPage()'>新增</button>
+				<div class="form-group">
+					<!-- <select class="form-control">
+						<option>请选择搜索类型</option>
+						<option>搜时间</option>
+						<option>搜问题</option>
+					</select> -->
+					<select class="form-control" ng-model="qureyType" ng-options="m.name for m in selectItems">
+					</select>
+				</div>
+
+				<div class="input-group search_group">
+					<input type="text" class="form-control" placeholder="请输入搜索内容" ng-model='queryText'>
+					<span class="input-group-btn">
+	        	<button class="btn btn-default" type="button" ng-click='pageChanged()'>搜索</button>
+	      	</span>
+				</div>
+				<!-- /input-group -->
+
+			</form>
+		</nav>
+
+		<div>
+
+			<div class="table-responsive">
+				<table class="table table-striped">
+						<tr>
+							<th>时间</th>
+							<th>受助人</th>
+							<th>捐款额</th>
+							<th>操作</th>
+						</tr>
+						<tr ng-repeat="pb in openItemsMini">
+							<td><span ng-bind="pb.timeStr"></span></td>
+							<td><span ng-bind="pb.name"></span></td>
+							<td><span ng-bind="pb.money"></span></td>
+							<td>
+
+									<button type="button" class="btn btn-warning btn-sm" ng-click="openXPage($index)">
+					 修改
+				</button>
+						<button type="button" class="btn btn-danger btn-sm" ng-click="openDelPage($index)" >
+					 删除
+				</button>
+							</td>
+						</tr>
+				</table>
+
+				<div class="text-right" style="margin-right:40px;">
+					<uib-pagination boundary-links="true" items-per-page="pageSize" ng-change="pageChanged()" total-items="totalItems" num-pages="pages" max-size="maxSize" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+					</uib-pagination>
+				</div>
+			</div>
+		</div>
+
+		<!--addmodal-->
+		<div class="modal fade" id="addModal" style="margin-top: 5%;" data-backdrop="static">
+			<div class="modal-dialog" style="width:700px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">添加数据</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">受助人名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="openItems.name" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">时间:</label>
+								<div class="col-sm-10">
+								 <input type="text" class="form-control" ng-model='openItems.timeStr' name="appDate" id="appDate"/>
+								<!-- 	<input type="text" class="form-control" ng-model="openItems.timeStr" /> -->
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">项目:</label>
+								<div class="col-sm-10">
+									<textarea style="width: 100%" ng-model="openItems.info"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">收款方:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="openItems.receivingParty" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">账户:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="openItems.account" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">捐款额:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="openItems.money" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button ng-if='!openItems.id' id = "xinzeng" type="button" class="btn btn-success"  ng-click="subNew()">保存</button>
+						<button ng-if='openItems.id' id = "xiugai" type="button" class="btn btn-success"  ng-click="alter()">修改</button>
+						<button type="button" class="btn btn-default" onclick="$('#addModal').modal('hide');">取消</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		<!--fixmodal-->
+		<!-- <div class="modal fade" id="fixModal" style="margin-top: 5%;">
+			<div class="modal-dialog" style="width:700px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">修改数据</h4>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal">
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">受助人名:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.receiver" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">时间:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.remittanceDate" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">项目:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.project" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">收款方:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.receivingParty" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">账户:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.cardNumber" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">捐款额:</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" ng-model="PBxqItems.money" />
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-success" onclick="$('#fixModal').modal('hide');">保存</button>
+						<button type="button" class="btn btn-default" onclick="$('#fixModal').modal('hide');">关闭</button>
+					</div>
+				</div>
+				/.modal-content
+			</div>
+			/.modal-dialog
+		</div> -->
+		<!-- /.modal -->
+		<!-- Modal 删除提醒 -->
+		<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+			<div class="modal-dialog modal-lg" role="document" style="width:400px;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+		            <span aria-hidden="true">&times;</span>
+		            <span class="sr-only">Close</span>
+	            </button>
+						<h4 class="modal-title">确认删除</h4>
+					</div>
+
+					<div class="modal-body">
+						<p>删除后不可恢复，是否确认删除？</p>
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" ng-click="choseD()">确定删除</button>
+						<button type="button" class="btn btn-default" onclick="$('#deleteModal').modal('hide');">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

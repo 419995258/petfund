@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--	<style>
+   
+    .img_box_big img{
+    	width: 100%;    	
+    	cursor: pointer;
+    }
+    </style>-->
+</head>
+<body>
+
+<div class="container qz_content">
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="thumbnail">
+				<div class="caption">				   
+				    <div class="caption_p">
+					    <p>捐赠主题：<span ng-bind="help.title"></span></p>
+						<p>目标： <span ng-bind="help.money" class="orange_text"></span>元</p>
+						<p>还需： <span ng-bind="help.money - help.moneyOff" class="orange_text"></span>元</p>
+				    </div>				
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="thumbnail">
+				<div class="caption">				   
+				    <div class="caption_p">
+					    <h5>请选择捐款金额</h5>
+						<form class="form-horizontal">
+						    <div class="check_form">
+						    	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 check_bj">
+							    	<div class="checkbox check">
+								        <label>
+								          	 <input type="radio" name="optionsRadios" id="optionsRadios2" value="20" ng-model="items.price">￥20
+									    </label>
+									</div>
+								</div>
+								
+								<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 check_bj">
+									<div class="checkbox check">
+								        <label>
+								          	 <input type="radio" name="optionsRadios" id="optionsRadios2" value="50" ng-model="items.price">￥50
+									    </label>
+									</div>
+								</div>
+								
+								<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 check_bj">
+									<div class="checkbox check">
+								        <label>
+								          	 <input type="radio" name="optionsRadios" id="optionsRadios2" value="100" ng-model="items.price">￥100
+									    </label>
+									</div>
+								</div>
+								
+								<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 check_bj">
+									<div class="checkbox check">
+								        <label>
+								          	 <input type="radio" name="optionsRadios" id="optionsRadios2" value="500" ng-model="items.price">￥500
+									    </label>
+									</div>
+								</div>									
+									
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 check_bj">
+									<div class="checkbox check">
+								        <label>
+								          	您的捐款金额：
+								          	<input type="text" class="jkje" ng-model="items.price"/>
+									    </label>
+									</div>
+								</div>
+						   </div>
+							
+							<!-- <p>感谢您的无私支持：求助者希望留下您的姓名和联系方式（非必填）</p>
+							
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 check_bj">
+								<input type="text" class="lxfs_input" placeholder="姓名" ng-model="items.name"/>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 check_bj">
+								<input type="text" class="lxfs_input" placeholder="手机号" ng-model="items.tel"/>
+							</div> -->
+						</form>
+				    </div>				
+				</div>
+			</div>
+		</div>
+	
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="thumbnail">
+				<div class="caption">				   
+				    <div class="caption_p">
+				 		<h5>请选择付款方式：</h5>
+				 		<span class="zfBtn apliy zfSelected" onclick="changeZf(this)" ng-click="onChange(1)"></span>
+				 		<span class="zfBtn weixin" onclick="changeZf(this)" ng-click="onChange(2)"></span>				 		
+				 	</div>
+				</div>
+			</div>
+			
+			<input ng-click="subZf()" type="button" class="btn btn-success btn-lg" value="确认支付" style="width:100%; margin-bottom: 50px;" />
+		</div>
+	</div>
+</div>
+<script>
+function changeZf(e){	
+	$('.zfBtn').removeClass('zfSelected');
+	$(e).addClass('zfSelected');
+};
+</script>
+</body>
+</html>

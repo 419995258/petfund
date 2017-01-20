@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<!-- 必须重新引入jquery否组上传图片显示英文 -->
+<!-- <script src="../static/js/lib/jquery/jquery-2.1.4.min.js"></script> -->
+
+<!-- 上传图片插件 -->
+<link href="../static/css/bootstrap/fileinput.css" media="all"
+	rel="stylesheet" type="text/css" />
+<script src="../static/js/lib/bootstrap/fileinput.js"
+	type="text/javascript"></script>
+<script src="../static/js/lib/bootstrap/fileinput_locale_zh.js"
+	type="text/javascript"></script>
+
+<script>
+	function gotop(e) {
+		$('.gotopBtn').removeClass('btn-success');
+		$(e).addClass('btn-success');
+	};
+</script>
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-default">
+		<span class="navbar-brand">紧急筹款</span>
+
+		<form class="navbar-form navbar-right">
+			<button type="button" class="btn btn-success btn-default"
+				ng-click='openAddNewsPage()'>新增</button>
+			<div class="form-group">
+				<!-- <select class="form-control">
+						<option>请选择搜索类型</option>
+						<option>搜时间</option>
+						<option>搜孩子</option>
+						<option>搜发起人</option>
+					</select> -->
+				<select class="form-control" ng-model="qureyType"
+					ng-options="m.name for m in selectItems">
+				</select>
+			</div>
+
+			<div class="input-group search_group">
+				<input type="text" class="form-control" placeholder="请输入搜索内容"
+					ng-model='queryText'> <span class="input-group-btn">
+					<button class="btn btn-default" type="button"
+						ng-click='pageChanged()'>搜索</button>
+				</span>
+			</div>
+			<!-- /input-group -->
+
+		</form>
+	</nav>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<tr>
+				<th>发布时间</th>
+				<th>项目名</th>
+				<th>孩子姓名</th>
+				<th>发起人</th>
+				<th>操作</th>
+			</tr>
+
+			<tr ng-repeat="x in projectChildItemsMini">
+				<td><span ng-bind="x.createTimeStr"></span></td>
+				<td><span ng-bind="x.title"></span></td>
+				<td><span ng-bind="x.childName"></span></td>
+				<td><span ng-bind="x.personName"></span></td>
+				<td>
+					<button type="button" class="btn btn-warning btn-sm"
+						ng-click="openXPage($index)">修改</button>
+					<button type="button" class="btn btn-danger btn-sm"
+						ng-click="openDelPage($index)">删除</button>
+					<button type="button" class="btn btn-sm gotopBtn "
+						ng-class="{true: 'btn-success', false: 'btn-sm'}[x.isTop]"
+						onclick="gotop(this)" ng-click="openTopPage($index)">置顶</button> <!-- 	<button type="button" class="btn btn-sm gotopBtn btn-success" ng-if="x.isTop" onclick="gotop(this)"
+						ng-click="openTopPage($index)">置顶</button>
+					<button type="button" class="btn btn-sm gotopBtn" ng-if="!x.isTop" onclick="gotop(this)"
+						ng-click="openTopPage($index)">置顶</button> -->
+
+				</td>
+			</tr>
+		</table>
+
+		<div class="text-right" style="margin-right:40px;">
+			<uib-pagination boundary-links="true" items-per-page="pageSize"
+				ng-change="pageChanged()" total-items="totalItems" num-pages="pages"
+				max-size="maxSize" ng-model="currentPage" class="pagination-sm"
+				previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+				last-text="&raquo;"> </uib-pagination>
+		</div>
+	</div>
+
+	<!-- Modal 新增和修改 -->
+	<div class="modal fade" id="addModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" data-backdrop="static">
+		<div class="modal-dialog modal-lg" role="document"
+			style="width:1000px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">编辑求助信息</h4>
+				</div>
+
+				<div class="modal-body">
+					<form class="form-horizontal">
+
+						<div class="row">
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">标题</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.title" />
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">孩子姓名</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.childName" />
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputEmail3" class="col-sm-4 control-label">性别</label>
+								<div class="col-sm-8">
+									<select class="form-control color9" ng-model="projectChildItems.sex">
+										<option  value="1" ng-selected="projectChildItems.sex==1" >男</option>
+										<option value="2" ng-selected="projectChildItems.sex==2">女</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">年龄</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.age" />
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">城市</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.cityNum" />
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">目标金额</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.money" />
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">发起人</label>
+								<div class="col-sm-8">
+									<select class="form-control color9" id="orgType"
+										ng-model="person" ng-options="m.realname for m in personInfs">
+									</select>
+									<!-- <input type="text" class="form-control"
+										ng-model="projectChildItems.personName" /> -->
+								</div>
+							</div>
+							
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">完成金额</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.moneyOff" />
+								</div>
+							</div>
+							
+							
+							<!-- <div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+									<label for="inputPassword3" class="col-sm-4 control-label">孩子照片</label>
+									<div class="col-sm-8">
+										<input type="file" />
+									</div>
+								</div> -->
+						</div>
+
+						<h3 class="qu_title">编辑详细介绍</h3>
+						<div class="dx_box">
+							<!--ueditor-->
+							<script type="text/plain" id="ckEditor1"
+								style="width:870px;height:200px;"
+								ng-model="projectChildItems.content">
+								</script>
+						</div>
+
+						<h3 class="qu_title">编辑病例</h3>
+						<div class="dx_box">
+							<!--ueditor-->
+							<script type="text/plain" id="ckEditor2"
+								style="width:870px;height:200px;">
+								</script>
+						</div>
+
+						<h3 class="qu_title">编辑父母感言</h3>
+						<div class="dx_box">
+							<!--ueditor-->
+							<script type="text/plain" id="ckEditor3"
+								style="width:870px;height:200px;">
+								</script>
+						</div>
+
+						<h3 class="qu_title">上传图片</h3>
+						<div class="displayin-bl positionr" ng-repeat="x in pictures">
+							<!-- <img style="width:120px;height:80px; margin-left:50px;"
+								class="img-responsive displayin-bl margincenter marginright10 marginbottom10 fapiao sqt"
+								ng-src="{{pictures.fileurl}}" /> -->
+									<img style="width:120px;height:80px; margin-left:50px;"
+								class="img-responsive displayin-bl margincenter marginright10 marginbottom10 fapiao sqt"
+								ng-src="{{x.fileurl}}" />
+					 	</div> 
+						<div  style="width:90%; margin-left:5%; margin-top:10px;">
+							<input id="file-5"
+								class="file" type="file" name="imgs"
+								data-preview-file-type="any"
+								data-upload-url="../helpmanageC/uploadTemp"
+								data-preview-file-icon=""
+								ng-model="projectChildItems.registerFile">
+						</div>
+
+					</form>
+				</div>
+
+
+				<div class="modal-footer">
+					<button ng-if='!projectChildItems.id' id="xinzeng" type="button"
+						class="btn btn-success" ng-click="subNew()">保存</button>
+					<button ng-if='projectChildItems.id' id="xiugai" type="button"
+						class="btn btn-success" ng-click="alter()">修改</button>
+					<button type="button" class="btn btn-default"
+						onclick="$('#addModal').modal('hide');">取消</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Modal 删除提醒 -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" data-backdrop="static">
+		<div class="modal-dialog modal-lg" role="document"
+			style="width:400px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">确认删除</h4>
+				</div>
+
+				<div class="modal-body">
+					<p>删除后不可恢复，是否确认删除？</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" ng-click="choseD()">确定删除</button>
+					<button type="button" class="btn btn-default"
+						onclick="$('#deleteModal').modal('hide');">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

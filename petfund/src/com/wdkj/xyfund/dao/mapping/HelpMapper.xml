@@ -1,0 +1,657 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wdkj.xyfund.dao.HelpMapper" >
+  <resultMap id="BaseResultMap" type="com.wdkj.xyfund.entity.Help" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="child_name" property="childName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="city_num" property="cityNum" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="money_off" property="moneyOff" jdbcType="DECIMAL" />
+    <result column="is_top" property="isTop" jdbcType="BIT" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="person_id" property="personId" jdbcType="INTEGER" />
+   <!--  <result column="pay_pas" property="payPas" jdbcType="VARCHAR" /> -->
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wdkj.xyfund.entity.HelpWithBLOBs" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="case_info" property="caseInfo" jdbcType="LONGVARCHAR" />
+    <result column="thanks" property="thanks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, child_name, sex, age, city_num, money, person_name, status, create_time, 
+    type, money_off, is_top, total, person_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    content, case_info, thanks
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.wdkj.xyfund.entity.HelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wdkj.xyfund.entity.HelpExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_help
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_help
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wdkj.xyfund.entity.HelpExample" >
+    delete from t_help
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wdkj.xyfund.entity.HelpWithBLOBs"  useGeneratedKeys="true" keyProperty="id">
+    insert into t_help ( title, child_name, 
+      sex, age, city_num, 
+      money, person_name, status, 
+      create_time, type, money_off, 
+      is_top, total, person_id, 
+      content, case_info, thanks
+      )
+    values ( #{title,jdbcType=VARCHAR}, #{childName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{age,jdbcType=INTEGER}, #{cityNum,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DECIMAL}, #{personName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{moneyOff,jdbcType=DECIMAL}, 
+      #{isTop,jdbcType=BIT}, #{total,jdbcType=INTEGER}, #{personId,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR}, #{caseInfo,jdbcType=LONGVARCHAR}, #{thanks,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wdkj.xyfund.entity.HelpWithBLOBs"  useGeneratedKeys="true" keyProperty="id">
+    insert into t_help
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="childName != null" >
+        child_name,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="cityNum != null" >
+        city_num,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="personName != null" >
+        person_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="moneyOff != null" >
+        money_off,
+      </if>
+      <if test="isTop != null" >
+        is_top,
+      </if>
+      <if test="total != null" >
+        total,
+      </if>
+      <if test="personId != null" >
+        person_id,
+      </if>
+      
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="caseInfo != null" >
+        case_info,
+      </if>
+      <if test="thanks != null" >
+        thanks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+     
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="childName != null" >
+        #{childName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cityNum != null" >
+        #{cityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="personName != null" >
+        #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="moneyOff != null" >
+        #{moneyOff,jdbcType=DECIMAL},
+      </if>
+      <if test="isTop != null" >
+        #{isTop,jdbcType=BIT},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=INTEGER},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=INTEGER},
+      </if>
+      <if test="payPas != null" >
+        #{payPas,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseInfo != null" >
+        #{caseInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="thanks != null" >
+        #{thanks,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_help
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.childName != null" >
+        child_name = #{record.childName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.cityNum != null" >
+        city_num = #{record.cityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.personName != null" >
+        person_name = #{record.personName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.moneyOff != null" >
+        money_off = #{record.moneyOff,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isTop != null" >
+        is_top = #{record.isTop,jdbcType=BIT},
+      </if>
+      <if test="record.total != null" >
+        total = #{record.total,jdbcType=INTEGER},
+      </if>
+      <if test="record.personId != null" >
+        person_id = #{record.personId,jdbcType=INTEGER},
+      </if>
+      <if test="record.payPas != null" >
+        payPas = #{record.payPas,jdbcType=INTEGER},
+      </if>
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.caseInfo != null" >
+        case_info = #{record.caseInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.thanks != null" >
+        thanks = #{record.thanks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_help
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      child_name = #{record.childName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=INTEGER},
+      city_num = #{record.cityNum,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DECIMAL},
+      person_name = #{record.personName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=INTEGER},
+      money_off = #{record.moneyOff,jdbcType=DECIMAL},
+      is_top = #{record.isTop,jdbcType=BIT},
+      total = #{record.total,jdbcType=INTEGER},
+      person_id = #{record.personId,jdbcType=INTEGER},
+      
+      content = #{record.content,jdbcType=LONGVARCHAR},
+      case_info = #{record.caseInfo,jdbcType=LONGVARCHAR},
+      thanks = #{record.thanks,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_help
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      child_name = #{record.childName,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      age = #{record.age,jdbcType=INTEGER},
+      city_num = #{record.cityNum,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DECIMAL},
+      person_name = #{record.personName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=INTEGER},
+      money_off = #{record.moneyOff,jdbcType=DECIMAL},
+      is_top = #{record.isTop,jdbcType=BIT},
+      total = #{record.total,jdbcType=INTEGER},
+      person_id = #{record.personId,jdbcType=INTEGER},
+      payPas = #{record.payPas,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wdkj.xyfund.entity.HelpWithBLOBs" >
+    update t_help
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="childName != null" >
+        child_name = #{childName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="cityNum != null" >
+        city_num = #{cityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="personName != null" >
+        person_name = #{personName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="moneyOff != null" >
+        money_off = #{moneyOff,jdbcType=DECIMAL},
+      </if>
+      <if test="isTop != null" >
+        is_top = #{isTop,jdbcType=BIT},
+      </if>
+      <if test="total != null" >
+        total = #{total,jdbcType=INTEGER},
+      </if>
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=INTEGER},
+      </if>
+   
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="caseInfo != null" >
+        case_info = #{caseInfo,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="thanks != null" >
+        thanks = #{thanks,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wdkj.xyfund.entity.HelpWithBLOBs" >
+    update t_help
+    set title = #{title,jdbcType=VARCHAR},
+      child_name = #{childName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      city_num = #{cityNum,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      person_name = #{personName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      money_off = #{moneyOff,jdbcType=DECIMAL},
+      is_top = #{isTop,jdbcType=BIT},
+      total = #{total,jdbcType=INTEGER},
+      person_id = #{personId,jdbcType=INTEGER},
+    
+      content = #{content,jdbcType=LONGVARCHAR},
+      case_info = #{caseInfo,jdbcType=LONGVARCHAR},
+      thanks = #{thanks,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wdkj.xyfund.entity.Help" >
+    update t_help
+    set title = #{title,jdbcType=VARCHAR},
+      child_name = #{childName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      city_num = #{cityNum,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DECIMAL},
+      person_name = #{personName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=INTEGER},
+      money_off = #{moneyOff,jdbcType=DECIMAL},
+      is_top = #{isTop,jdbcType=BIT},
+      total = #{total,jdbcType=INTEGER},
+      person_id = #{personId,jdbcType=INTEGER}
+      
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap id="BaseResultMap1" type="com.wdkj.xyfund.controller.vo.HelpVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="child_name" property="childName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="city_num" property="cityNum" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="money_off" property="moneyOff" jdbcType="DECIMAL" />
+    <result column="is_top" property="isTop" jdbcType="BIT" />
+    <result column="jzmoney" property="jzmoney" jdbcType="DECIMAL" />
+    <result column="fileurl" property="fileurl" jdbcType="VARCHAR" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="person_id" property="personId" jdbcType="INTEGER" />
+    
+    <result column="all_project" property="allProject" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs1" type="com.wdkj.xyfund.controller.vo.HelpWithBLOBsVo" extends="BaseResultMap1" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="case_info" property="caseInfo" jdbcType="LONGVARCHAR" />
+    <result column="thanks" property="thanks" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List1" >
+    a.id, a.title, a.child_name, a.sex, age, a.city_num, a.money, a.person_name, a.status, a.create_time, 
+    a.type, a.money_off, a.is_top, a.total, a.person_id, b.money jzmoney, a.fileurl
+  </sql>
+  
+  <sql id="Blob_Column_List1" >
+    a.content, a.case_info, a.thanks
+  </sql>
+    
+  <sql id="Base_Column_List1_1" >
+    distinct t.id, t.title, t.child_name, t.sex, t.age, t.city_num, t.money, t.person_name, t.status, t.create_time, 
+    t.type, t.money_off, t.is_top, t.total, t.person_id, t2.fileurl, t.content, t.case_info, t.thanks
+  </sql>
+    
+   <sql id="Base_Column_List2" >
+    DISTINCT a.id, a.title, a.child_name, a.sex, age, a.city_num, a.money, a.person_name, a.status, a.create_time, 
+    a.type, a.money_off, a.is_top, a.total, a.person_id ,b.fileurl, c.initiateNum
+  </sql>
+  
+    <sql id="Base_Column_List3" >
+    DISTINCT a.id, a.title, a.child_name, a.sex, age, a.city_num, a.money, a.person_name, a.status, a.create_time, 
+    a.type, a.money_off, a.is_top, a.total, a.person_id, b.fileurl, c.initiateNum
+  </sql>
+    
+    
+    
+  <select id="selectByContribution" resultMap="ResultMapWithBLOBs1" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    select
+    <include refid="Base_Column_List1" />
+    ,
+    <include refid="Blob_Column_List1" />
+    from t_contribution b LEFT JOIN (SELECT <include refid="Base_Column_List1_1" /> FROM t_help t LEFT JOIN t_help_files t1 ON t.id = t1.`help_id` LEFT JOIN t_file t2 ON t1.`file_id` = t2.id) a
+ ON b.`info_id` = a.`id` 
+ WHERE b.`user_id` = #{userId,jdbcType=INTEGER} 
+ 	<if test="contributionType != null" >
+        AND b.`contribution_type` = #{contributionType,jdbcType=INTEGER} 
+      </if>
+ AND b.`status` = 1
+  </select>
+  
+  
+  
+  <select id="selectAndFile" resultMap="BaseResultMap1" parameterType="com.wdkj.xyfund.entity.Help" >
+    select
+    <include refid="Base_Column_List2" />
+    FROM t_help a LEFT JOIN (SELECT t1.`help_id`, t2.`fileurl` FROM t_help_files t1 LEFT JOIN t_file t2 ON t1.`file_id` = t2.`id`) b
+     on a.id = b.help_id LEFT JOIN (SELECT th.person_id, COUNT(th.id) initiateNum FROM t_help th WHERE th.status IN (1,2) GROUP BY th.person_id) C
+     on a.person_id = c.person_id
+      where  a.type = #{type,jdbcType=INTEGER} and a.status = 1
+      
+      <if test="isTop != null" >
+        and a.is_top = #{isTop,jdbcType=INTEGER}
+      </if>
+      order by a.`id` desc
+      
+  </select>
+  
+  <select id="selectAndFileIsTop" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List3" />
+    FROM t_help a LEFT JOIN (SELECT t1.`help_id`, t2.`fileurl` FROM t_help_files t1 LEFT JOIN t_file t2 ON t1.`file_id` = t2.`id`) b
+     on a.id = b.help_id LEFT JOIN (SELECT th.person_id, COUNT(th.id) initiateNum FROM t_help th WHERE th.status IN (1,2) GROUP BY th.person_id) C
+     on a.person_id = c.person_id
+      where a.type = #{type,jdbcType=INTEGER} and a.status = 1 and a.is_top = 1
+  </select>
+  
+  <select id="selectAndFileById" resultMap="BaseResultMap1" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List2" />
+    FROM t_help a LEFT JOIN (SELECT t1.`help_id`, t2.`fileurl` FROM t_help_files t1 LEFT JOIN t_file t2 ON t1.`file_id` = t2.`id`) b
+     on a.id = b.help_id LEFT JOIN (SELECT th.person_id, COUNT(th.id) initiateNum FROM t_help th WHERE th.status IN (1,2) GROUP BY th.person_id) C
+     on a.person_id = c.person_id
+      where a.id = #{id,jdbcType=INTEGER}
+  </select>
+ 
+  
+  <sql id="help_project" >
+    count(*) AS allProject
+  </sql>
+ 
+   <select id="selectProject" resultType="java.lang.Long" >
+    select
+    <include refid="help_project" />
+    FROM t_help 
+  </select>
+
+<sql id="select_ConTime" >
+    count(*)
+  </sql>
+ 
+   <select id="selectConTime" resultType="java.lang.Long" >
+    select
+    <include refid="select_ConTime" />
+    FROM t_contribution 
+  </select>  
+  
+  
+  <sql id="select_money" >
+   sum(money) 
+  </sql>
+ 
+   <select id="selectMoney" resultType="java.lang.Long" >
+    select
+    <include refid="select_money" />
+    FROM t_contribution
+  </select>
+  <select id="selectHelped" resultMap="BaseResultMapSDL">
+  	SELECT 
+	  a.`id`,
+	  a.`child_name`,
+	  a.`sex`,
+	  d.fileurl 
+	FROM
+	  t_help a 
+	  LEFT JOIN 
+	    (SELECT 
+	      b.`help_id` AS `help_id`,c.`fileurl` AS `fileurl` 
+	    FROM
+	      t_help_files b 
+	      LEFT JOIN t_file c 
+	        ON b.`file_id` = c.`id`) d 
+	    ON a.`id` = d.help_id 
+	WHERE a.`status`=2 AND a.`type`=1 order by a.`id` desc
+  </select>
+  <resultMap id="BaseResultMapSDL" type="com.wdkj.xyfund.controller.vo.HelpVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <!-- <result column="title" property="title" jdbcType="VARCHAR" /> -->
+    <result column="child_name" property="childName" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="fileurl" property="fileurl" jdbcType="VARCHAR" />
+    <!-- <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="city_num" property="cityNum" jdbcType="VARCHAR" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="person_name" property="personName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="money_off" property="moneyOff" jdbcType="DECIMAL" />
+    <result column="is_top" property="isTop" jdbcType="BIT" />
+    <result column="jzmoney" property="jzmoney" jdbcType="DECIMAL" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="person_id" property="personId" jdbcType="INTEGER" />
+    <result column="all_project" property="allProject" jdbcType="INTEGER" /> -->
+  </resultMap>
+ 
+</mapper>

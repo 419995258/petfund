@@ -1,0 +1,58 @@
+<html>
+
+	<head>
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-default">
+			<span class="navbar-brand">管理员登录日志</span>
+<!-- 
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<select class="form-control">
+						<option>请选择搜索类型</option>
+						<option>搜时间</option>
+						<option>搜帐号</option>
+						<option>搜姓名</option>
+					</select>
+
+				</div>
+
+				<div class="input-group search_group">
+					<input type="text" class="form-control" placeholder="请输入搜索内容">
+					<span class="input-group-btn">
+	        	<button class="btn btn-default" type="button">搜索</button>
+	      	</span>
+				</div>
+				/input-group
+
+			</form> -->
+		</nav>
+
+		<div class="table-responsive">
+			<table class="table table-striped">
+					<tr>
+						<th>登录时间</th>
+						<th>帐号</th>
+						<th>姓名</th>
+					</tr>
+
+				<tr ng-repeat="x in logItems">
+					<td><span ng-bind="x.loginDateStr"></span></td>
+					<td><span ng-bind="x.username"></span></td>
+					<td><span ng-bind="x.realname"></span></td>
+				</tr>
+			</table>
+
+			<div class="text-right" style="margin-right:40px;">
+				<uib-pagination boundary-links="true" items-per-page="pageSize" ng-change="pageChanged()" total-items="totalItems" num-pages="pages" max-size="maxSize" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+				</uib-pagination>
+			</div>
+		</div>
+
+		
+
+	</body>
+
+</html>

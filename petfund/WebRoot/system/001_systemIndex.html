@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title></title>
+
+		<!-- 新 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="../static/css/bootstrap/bootstrap.min.css">
+		<link href="../static/css/dashboard.css" rel="stylesheet">
+		<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+		<script src="../static/js/lib/jquery/jquery-2.1.4.min.js"></script>
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="../static/js/lib/bootstrap/bootstrap.min.js"></script>
+		<!-- HTML5 Shim 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+		<!--[if lt IE 9]>
+	<script src="../static/js/lib/bootstrap/html5.min.js"></script>
+	<script src="../static/js/lib/bootstrap/respond.min.js"></script>
+<![endif]-->
+
+		<!-- 自定义样式 -->
+		<link rel="stylesheet" href="../static/css/systemStyle.css">
+
+		<!-- 路由相关js -->
+		<script type="text/javascript" src="../static/js/lib/angular/angular.min.js"></script>
+		<script type="text/javascript" src="../static/js/lib/angular/angular-animate 1.4.min.js"></script>
+		<script type="text/javascript" src="../static/js/lib/angular/angular-ui-router v1.0.0-alpha.5.min.js"></script>
+		<script type="text/javascript" src="../static/js/lib/angular/ui-bootstrap/ui-bootstrap.min.js"></script>
+		<!-- 国际化相关js -->
+		<script type="text/javascript" src="../static/js/lib/angular/angular-translate.min.js"></script>
+		<script type="text/javascript" src="../static/js/lib/angular/angular-cookies.min.js"></script>
+		<!-- 国际化相关js -->
+
+		<script type="text/javascript" src="../static/js/lib/angular/tm.pagination.js"></script>
+		<!--分页?-->
+		<link type="text/css" rel="stylesheet" href="../static/css/views/system/page-list.css" />
+		<!--分页样式?-->
+
+		<!-- 分页 -->
+		<script type="text/javascript" src="../static/js/lib/angular/ui-bootstrap/ui-bootstrap-tpls 0.14.3.min.js"></script>
+
+		<!-- 校验必填项 -->
+		<script type="text/javascript" src="../static/js/lib/global.js"></script>
+		
+		
+		<!--图片展示-->
+		<script type="text/javascript" src="../static/js/lib/jquery/jquery.fancybox.js"></script>
+		<link href="../static/css/jquery.fancybox.css" rel="stylesheet" type="text/css" media="screen" />
+
+		<!--ueditor(图文编辑器)相关-->
+		<link href="../static/ueditor/themes/default/_css/umeditor.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" charset="utf-8" src="../static/ueditor/umeditor.config.js"></script>
+		<script type="text/javascript" charset="utf-8" src="../static/ueditor/editor_api.js"></script>
+		<script type="text/javascript" src="../static/ueditor/lang/zh-cn/zh-cn.js"></script>
+
+		<!-- 页面js -->
+		<script type="text/javascript" src="../static/js/system/001_systemIndex.js"></script>
+		<!--Index-->
+		<script type="text/javascript" src="../static/js/system/003_systemUser.js"></script><!--用户管理-->		
+		
+		<script type="text/javascript" src="../static/js/system/004_volunteer.js"></script>
+		<!--志愿者管理-->
+		<script type="text/javascript" src="../static/js/system/005_help.js"></script>
+		<!--收到的求助-->
+		<script type="text/javascript" src="../static/js/system/006_choukuan.js"></script>
+		<!--紧急筹款-->
+		<script type="text/javascript" src="../static/js/system/007_huiju.js"></script>
+		<!--将爱汇聚-->
+		<script type="text/javascript" src="../static/js/system/008_pass.js"></script>
+		<!--让爱传递-->
+		<script type="text/javascript" src="../static/js/system/009_news.js"></script>
+		<!--新闻资讯-->
+		<script type="text/javascript" src="../static/js/system/010_media.js"></script>
+		<!--媒体报道-->
+		<script type="text/javascript" src="../static/js/system/011_example.js"></script>
+		<!--典型案例-->
+		<script type="text/javascript" src="../static/js/system/012_fengcai.js"></script>
+		<!--志愿风采-->
+		<script type="text/javascript" src="../static/js/system/013_about.js"></script>
+		<!--关于心雨基金-->
+		<script type="text/javascript" src="../static/js/system/014_service.js"></script>
+		<!--客服中心-->
+		<script type="text/javascript" src="../static/js/system/015_public.js"></script>
+		<!--公开透明-->
+		<script type="text/javascript" src="../static/js/system/016_thanks.js"></script>
+		<!--感恩有你-->
+		<script type="text/javascript" src="../static/js/system/017_friendLink.js"></script>
+		<!--友情链接-->
+		<script type="text/javascript" src="../static/js/system/018_administratorLog.js"></script>
+		<!--管理员登录日志-->
+
+	</head>
+
+	<body ng-app="systemIndexApp">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">仁爱基金网站管理</a>
+				</div>
+				<button type="button" onclick="changeActive(this)" class="btn btn-info btn-sm"
+						ng-click="logout()" style="float:right; margin-top:10px; marin-right:10px;">退出</button>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<ul class="nav nav-sidebar main_menu">
+						<div class="menu_box">
+							<h3 class="menu_title">用户管理</h3>
+							<li class="menu_btn" onclick="changeActive(this)" id="systemUser" ui-sref="systemUser"><span>普通用户管理</span></li>
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="volunteer" ui-sref="volunteer"><span>志愿者管理</span> </li> -->
+						</div>
+
+						<!-- <div class="menu_box">
+							<h3 class="menu_title">求助管理</h3>
+							<li class="menu_btn" onclick="changeActive(this)" id="help" ui-sref="help"><span>收到的求助</span></li>
+						</div> -->
+
+						<div class="menu_box">
+							<h3 class="menu_title">信息发布</h3>
+							<li class="menu_btn" onclick="changeActive(this)" id="choukuan" ui-sref="choukuan"><span>紧急筹款</span></li>
+							<li class="menu_btn" onclick="changeActive(this)" id="huiju" ui-sref="huiju"><span>将爱汇聚</span> </li>
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="pass" ui-sref="pass"><span>让爱传递</span> </li> -->
+						</div>
+
+					<!-- 	<div class="menu_box">
+							<h3 class="menu_title">新闻管理</h3>
+							<li class="menu_btn" onclick="changeActive(this)" id="news" ui-sref="news"><span>新闻资讯</span> </li>
+							<li class="menu_btn" onclick="changeActive(this)" id="media" ui-sref="media"><span>媒体报道</span> </li>
+							<li class="menu_btn" onclick="changeActive(this)" id="example" ui-sref="example"><span>典型案例</span> </li>
+							<li class="menu_btn" onclick="changeActive(this)" id="fengcai" ui-sref="fengcai"><span>志愿风采</span> </li>
+						</div> -->
+
+						<div class="menu_box">
+							<h3 class="menu_title">其他信息管理</h3>
+							<li class="menu_btn" onclick="changeActive(this)" id="about" ui-sref="about"><span>关于仁爱基金</span> </li>
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="service" ui-sref="service"><span>客服中心</span> </li> -->
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="public" ui-sref="public"><span>公开透明</span> </li> -->
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="thanks" ui-sref="thanks"><span>感恩有你</span> </li> -->
+							<li class="menu_btn" onclick="changeActive(this)" id="administratorLog" ui-sref="administratorLog"><span>管理员登录日志</span></li>
+							<!-- <li class="menu_btn" onclick="changeActive(this)" id="administratorLog" ng-click="logout()"><span>管理员登出</span></li> -->
+						</div>
+					</ul>
+				</div>
+
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ui-view>
+
+				</div>
+
+			</div>
+		</div>
+
+		<style>
+			.menu_box {
+				-moz-user-select: none;
+				-khtml-user-select: none;
+				user-select: none;
+			}
+		</style>
+
+		<script>
+			function changeActive(e) {
+				$('.menu_btn').removeClass('active');
+				$(e).addClass('active');
+			};
+		</script>
+	</body>
+
+</html>
