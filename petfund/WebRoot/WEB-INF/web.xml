@@ -3,7 +3,7 @@
   <display-name></display-name>
   <context-param>
     <param-name>webAppRootKey</param-name>
-    <param-value>rafund.root</param-value>
+    <param-value>petfund.root</param-value>
   </context-param>
   <context-param>
     <param-name>log4jConfigLocation</param-name>
