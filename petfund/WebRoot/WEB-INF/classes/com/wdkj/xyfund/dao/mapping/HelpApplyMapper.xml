@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wdkj.xyfund.dao.HelpApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.wdkj.xyfund.entity.HelpApply" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="child" property="child" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="nation" property="nation" jdbcType="VARCHAR" />
+    <result column="native_place" property="nativePlace" jdbcType="VARCHAR" />
+    <result column="guardian" property="guardian" jdbcType="VARCHAR" />
+    <result column="guardian_age" property="guardianAge" jdbcType="INTEGER" />
+    <result column="rela_apply" property="relaApply" jdbcType="VARCHAR" />
+    <result column="guardian_id_num" property="guardianIdNum" jdbcType="VARCHAR" />
+    <result column="occupation" property="occupation" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="is_agr" property="isAgr" jdbcType="INTEGER" />
+    <result column="familys" property="familys" jdbcType="INTEGER" />
+    <result column="income_stream" property="incomeStream" jdbcType="VARCHAR" />
+    <result column="year_income" property="yearIncome" jdbcType="DECIMAL" />
+    <result column="people_year_income" property="peopleYearIncome" jdbcType="DECIMAL" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="diagnosis" property="diagnosis" jdbcType="VARCHAR" />
+    <result column="hospital" property="hospital" jdbcType="VARCHAR" />
+    <result column="doctor" property="doctor" jdbcType="VARCHAR" />
+    <result column="doctor_tel" property="doctorTel" jdbcType="VARCHAR" />
+    <result column="ho_budget" property="hoBudget" jdbcType="DECIMAL" />
+    <result column="pe_budget" property="peBudget" jdbcType="DECIMAL" />
+    <result column="apply_budget" property="applyBudget" jdbcType="DECIMAL" />
+    <result column="in_date" property="inDate" jdbcType="DATE" />
+    <result column="number" property="number" jdbcType="VARCHAR" />
+    <result column="reimbursement_ratio" property="reimbursementRatio" jdbcType="DOUBLE" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="apply_username" property="applyUsername" jdbcType="VARCHAR" />
+    <result column="apply_date" property="applyDate" jdbcType="DATE" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.wdkj.xyfund.entity.HelpApply" extends="BaseResultMap" >
+    <result column="cause" property="cause" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, child, sex, birthday, nation, native_place, guardian, guardian_age, rela_apply, 
+    guardian_id_num, occupation, tel, is_agr, familys, income_stream, year_income, people_year_income, 
+    money, diagnosis, hospital, doctor, doctor_tel, ho_budget, pe_budget, apply_budget, 
+    in_date, number, reimbursement_ratio, status, user_id, apply_username, apply_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    cause
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.wdkj.xyfund.entity.HelpApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_help_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wdkj.xyfund.entity.HelpApplyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_help_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_help_apply
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_help_apply
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wdkj.xyfund.entity.HelpApplyExample" >
+    delete from t_help_apply
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wdkj.xyfund.entity.HelpApply" useGeneratedKeys="true" keyProperty="id">
+    insert into t_help_apply (child, sex, 
+      birthday, nation, native_place, 
+      guardian, guardian_age, rela_apply, 
+      guardian_id_num, occupation, tel, 
+      is_agr, familys, income_stream, 
+      year_income, people_year_income, money, 
+      diagnosis, hospital, doctor, 
+      doctor_tel, ho_budget, pe_budget, 
+      apply_budget, in_date, number, 
+      reimbursement_ratio, status, user_id, 
+      apply_username, apply_date, cause
+      )
+    values (#{child,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{birthday,jdbcType=DATE}, #{nation,jdbcType=VARCHAR}, #{nativePlace,jdbcType=VARCHAR}, 
+      #{guardian,jdbcType=VARCHAR}, #{guardianAge,jdbcType=INTEGER}, #{relaApply,jdbcType=VARCHAR}, 
+      #{guardianIdNum,jdbcType=VARCHAR}, #{occupation,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{isAgr,jdbcType=INTEGER}, #{familys,jdbcType=INTEGER}, #{incomeStream,jdbcType=VARCHAR}, 
+      #{yearIncome,jdbcType=DECIMAL}, #{peopleYearIncome,jdbcType=DECIMAL}, #{money,jdbcType=DECIMAL}, 
+      #{diagnosis,jdbcType=VARCHAR}, #{hospital,jdbcType=VARCHAR}, #{doctor,jdbcType=VARCHAR}, 
+      #{doctorTel,jdbcType=VARCHAR}, #{hoBudget,jdbcType=DECIMAL}, #{peBudget,jdbcType=DECIMAL}, 
+      #{applyBudget,jdbcType=DECIMAL}, #{inDate,jdbcType=DATE}, #{number,jdbcType=VARCHAR}, 
+      #{reimbursementRatio,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{applyUsername,jdbcType=VARCHAR}, #{applyDate,jdbcType=DATE}, #{cause,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wdkj.xyfund.entity.HelpApply" useGeneratedKeys="true" keyProperty="id">
+    insert into t_help_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="child != null" >
+        child,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="nation != null" >
+        nation,
+      </if>
+      <if test="nativePlace != null" >
+        native_place,
+      </if>
+      <if test="guardian != null" >
+        guardian,
+      </if>
+      <if test="guardianAge != null" >
+        guardian_age,
+      </if>
+      <if test="relaApply != null" >
+        rela_apply,
+      </if>
+      <if test="guardianIdNum != null" >
+        guardian_id_num,
+      </if>
+      <if test="occupation != null" >
+        occupation,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="isAgr != null" >
+        is_agr,
+      </if>
+      <if test="familys != null" >
+        familys,
+      </if>
+      <if test="incomeStream != null" >
+        income_stream,
+      </if>
+      <if test="yearIncome != null" >
+        year_income,
+      </if>
+      <if test="peopleYearIncome != null" >
+        people_year_income,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis,
+      </if>
+      <if test="hospital != null" >
+        hospital,
+      </if>
+      <if test="doctor != null" >
+        doctor,
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel,
+      </if>
+      <if test="hoBudget != null" >
+        ho_budget,
+      </if>
+      <if test="peBudget != null" >
+        pe_budget,
+      </if>
+      <if test="applyBudget != null" >
+        apply_budget,
+      </if>
+      <if test="inDate != null" >
+        in_date,
+      </if>
+      <if test="number != null" >
+        number,
+      </if>
+      <if test="reimbursementRatio != null" >
+        reimbursement_ratio,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="applyUsername != null" >
+        apply_username,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="cause != null" >
+        cause,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="child != null" >
+        #{child,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nation != null" >
+        #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="guardian != null" >
+        #{guardian,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianAge != null" >
+        #{guardianAge,jdbcType=INTEGER},
+      </if>
+      <if test="relaApply != null" >
+        #{relaApply,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianIdNum != null" >
+        #{guardianIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgr != null" >
+        #{isAgr,jdbcType=INTEGER},
+      </if>
+      <if test="familys != null" >
+        #{familys,jdbcType=INTEGER},
+      </if>
+      <if test="incomeStream != null" >
+        #{incomeStream,jdbcType=VARCHAR},
+      </if>
+      <if test="yearIncome != null" >
+        #{yearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="peopleYearIncome != null" >
+        #{peopleYearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="diagnosis != null" >
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null" >
+        #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hoBudget != null" >
+        #{hoBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="peBudget != null" >
+        #{peBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="applyBudget != null" >
+        #{applyBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="inDate != null" >
+        #{inDate,jdbcType=DATE},
+      </if>
+      <if test="number != null" >
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementRatio != null" >
+        #{reimbursementRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="applyUsername != null" >
+        #{applyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="cause != null" >
+        #{cause,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_help_apply
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.child != null" >
+        child = #{record.child,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.nation != null" >
+        nation = #{record.nation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nativePlace != null" >
+        native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guardian != null" >
+        guardian = #{record.guardian,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guardianAge != null" >
+        guardian_age = #{record.guardianAge,jdbcType=INTEGER},
+      </if>
+      <if test="record.relaApply != null" >
+        rela_apply = #{record.relaApply,jdbcType=VARCHAR},
+      </if>
+      <if test="record.guardianIdNum != null" >
+        guardian_id_num = #{record.guardianIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.occupation != null" >
+        occupation = #{record.occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isAgr != null" >
+        is_agr = #{record.isAgr,jdbcType=INTEGER},
+      </if>
+      <if test="record.familys != null" >
+        familys = #{record.familys,jdbcType=INTEGER},
+      </if>
+      <if test="record.incomeStream != null" >
+        income_stream = #{record.incomeStream,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yearIncome != null" >
+        year_income = #{record.yearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.peopleYearIncome != null" >
+        people_year_income = #{record.peopleYearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.diagnosis != null" >
+        diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospital != null" >
+        hospital = #{record.hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctor != null" >
+        doctor = #{record.doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorTel != null" >
+        doctor_tel = #{record.doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hoBudget != null" >
+        ho_budget = #{record.hoBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.peBudget != null" >
+        pe_budget = #{record.peBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.applyBudget != null" >
+        apply_budget = #{record.applyBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="record.inDate != null" >
+        in_date = #{record.inDate,jdbcType=DATE},
+      </if>
+      <if test="record.number != null" >
+        number = #{record.number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reimbursementRatio != null" >
+        reimbursement_ratio = #{record.reimbursementRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.applyUsername != null" >
+        apply_username = #{record.applyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyDate != null" >
+        apply_date = #{record.applyDate,jdbcType=DATE},
+      </if>
+      <if test="record.cause != null" >
+        cause = #{record.cause,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_help_apply
+    set id = #{record.id,jdbcType=INTEGER},
+      child = #{record.child,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=DATE},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      guardian = #{record.guardian,jdbcType=VARCHAR},
+      guardian_age = #{record.guardianAge,jdbcType=INTEGER},
+      rela_apply = #{record.relaApply,jdbcType=VARCHAR},
+      guardian_id_num = #{record.guardianIdNum,jdbcType=VARCHAR},
+      occupation = #{record.occupation,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      is_agr = #{record.isAgr,jdbcType=INTEGER},
+      familys = #{record.familys,jdbcType=INTEGER},
+      income_stream = #{record.incomeStream,jdbcType=VARCHAR},
+      year_income = #{record.yearIncome,jdbcType=DECIMAL},
+      people_year_income = #{record.peopleYearIncome,jdbcType=DECIMAL},
+      money = #{record.money,jdbcType=DECIMAL},
+      diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+      hospital = #{record.hospital,jdbcType=VARCHAR},
+      doctor = #{record.doctor,jdbcType=VARCHAR},
+      doctor_tel = #{record.doctorTel,jdbcType=VARCHAR},
+      ho_budget = #{record.hoBudget,jdbcType=DECIMAL},
+      pe_budget = #{record.peBudget,jdbcType=DECIMAL},
+      apply_budget = #{record.applyBudget,jdbcType=DECIMAL},
+      in_date = #{record.inDate,jdbcType=DATE},
+      number = #{record.number,jdbcType=VARCHAR},
+      reimbursement_ratio = #{record.reimbursementRatio,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      apply_username = #{record.applyUsername,jdbcType=VARCHAR},
+      apply_date = #{record.applyDate,jdbcType=DATE},
+      cause = #{record.cause,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_help_apply
+    set id = #{record.id,jdbcType=INTEGER},
+      child = #{record.child,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=INTEGER},
+      birthday = #{record.birthday,jdbcType=DATE},
+      nation = #{record.nation,jdbcType=VARCHAR},
+      native_place = #{record.nativePlace,jdbcType=VARCHAR},
+      guardian = #{record.guardian,jdbcType=VARCHAR},
+      guardian_age = #{record.guardianAge,jdbcType=INTEGER},
+      rela_apply = #{record.relaApply,jdbcType=VARCHAR},
+      guardian_id_num = #{record.guardianIdNum,jdbcType=VARCHAR},
+      occupation = #{record.occupation,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      is_agr = #{record.isAgr,jdbcType=INTEGER},
+      familys = #{record.familys,jdbcType=INTEGER},
+      income_stream = #{record.incomeStream,jdbcType=VARCHAR},
+      year_income = #{record.yearIncome,jdbcType=DECIMAL},
+      people_year_income = #{record.peopleYearIncome,jdbcType=DECIMAL},
+      money = #{record.money,jdbcType=DECIMAL},
+      diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+      hospital = #{record.hospital,jdbcType=VARCHAR},
+      doctor = #{record.doctor,jdbcType=VARCHAR},
+      doctor_tel = #{record.doctorTel,jdbcType=VARCHAR},
+      ho_budget = #{record.hoBudget,jdbcType=DECIMAL},
+      pe_budget = #{record.peBudget,jdbcType=DECIMAL},
+      apply_budget = #{record.applyBudget,jdbcType=DECIMAL},
+      in_date = #{record.inDate,jdbcType=DATE},
+      number = #{record.number,jdbcType=VARCHAR},
+      reimbursement_ratio = #{record.reimbursementRatio,jdbcType=DOUBLE},
+      status = #{record.status,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      apply_username = #{record.applyUsername,jdbcType=VARCHAR},
+      apply_date = #{record.applyDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wdkj.xyfund.entity.HelpApply" >
+    update t_help_apply
+    <set >
+      <if test="child != null" >
+        child = #{child,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="nation != null" >
+        nation = #{nation,jdbcType=VARCHAR},
+      </if>
+      <if test="nativePlace != null" >
+        native_place = #{nativePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="guardian != null" >
+        guardian = #{guardian,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianAge != null" >
+        guardian_age = #{guardianAge,jdbcType=INTEGER},
+      </if>
+      <if test="relaApply != null" >
+        rela_apply = #{relaApply,jdbcType=VARCHAR},
+      </if>
+      <if test="guardianIdNum != null" >
+        guardian_id_num = #{guardianIdNum,jdbcType=VARCHAR},
+      </if>
+      <if test="occupation != null" >
+        occupation = #{occupation,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="isAgr != null" >
+        is_agr = #{isAgr,jdbcType=INTEGER},
+      </if>
+      <if test="familys != null" >
+        familys = #{familys,jdbcType=INTEGER},
+      </if>
+      <if test="incomeStream != null" >
+        income_stream = #{incomeStream,jdbcType=VARCHAR},
+      </if>
+      <if test="yearIncome != null" >
+        year_income = #{yearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="peopleYearIncome != null" >
+        people_year_income = #{peopleYearIncome,jdbcType=DECIMAL},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="diagnosis != null" >
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="hospital != null" >
+        hospital = #{hospital,jdbcType=VARCHAR},
+      </if>
+      <if test="doctor != null" >
+        doctor = #{doctor,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorTel != null" >
+        doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      </if>
+      <if test="hoBudget != null" >
+        ho_budget = #{hoBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="peBudget != null" >
+        pe_budget = #{peBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="applyBudget != null" >
+        apply_budget = #{applyBudget,jdbcType=DECIMAL},
+      </if>
+      <if test="inDate != null" >
+        in_date = #{inDate,jdbcType=DATE},
+      </if>
+      <if test="number != null" >
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="reimbursementRatio != null" >
+        reimbursement_ratio = #{reimbursementRatio,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="applyUsername != null" >
+        apply_username = #{applyUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=DATE},
+      </if>
+      <if test="cause != null" >
+        cause = #{cause,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.wdkj.xyfund.entity.HelpApply" >
+    update t_help_apply
+    set child = #{child,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      nation = #{nation,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      guardian = #{guardian,jdbcType=VARCHAR},
+      guardian_age = #{guardianAge,jdbcType=INTEGER},
+      rela_apply = #{relaApply,jdbcType=VARCHAR},
+      guardian_id_num = #{guardianIdNum,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      is_agr = #{isAgr,jdbcType=INTEGER},
+      familys = #{familys,jdbcType=INTEGER},
+      income_stream = #{incomeStream,jdbcType=VARCHAR},
+      year_income = #{yearIncome,jdbcType=DECIMAL},
+      people_year_income = #{peopleYearIncome,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      doctor = #{doctor,jdbcType=VARCHAR},
+      doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      ho_budget = #{hoBudget,jdbcType=DECIMAL},
+      pe_budget = #{peBudget,jdbcType=DECIMAL},
+      apply_budget = #{applyBudget,jdbcType=DECIMAL},
+      in_date = #{inDate,jdbcType=DATE},
+      number = #{number,jdbcType=VARCHAR},
+      reimbursement_ratio = #{reimbursementRatio,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      apply_username = #{applyUsername,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=DATE},
+      cause = #{cause,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wdkj.xyfund.entity.HelpApply" >
+    update t_help_apply
+    set child = #{child,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=DATE},
+      nation = #{nation,jdbcType=VARCHAR},
+      native_place = #{nativePlace,jdbcType=VARCHAR},
+      guardian = #{guardian,jdbcType=VARCHAR},
+      guardian_age = #{guardianAge,jdbcType=INTEGER},
+      rela_apply = #{relaApply,jdbcType=VARCHAR},
+      guardian_id_num = #{guardianIdNum,jdbcType=VARCHAR},
+      occupation = #{occupation,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      is_agr = #{isAgr,jdbcType=INTEGER},
+      familys = #{familys,jdbcType=INTEGER},
+      income_stream = #{incomeStream,jdbcType=VARCHAR},
+      year_income = #{yearIncome,jdbcType=DECIMAL},
+      people_year_income = #{peopleYearIncome,jdbcType=DECIMAL},
+      money = #{money,jdbcType=DECIMAL},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      hospital = #{hospital,jdbcType=VARCHAR},
+      doctor = #{doctor,jdbcType=VARCHAR},
+      doctor_tel = #{doctorTel,jdbcType=VARCHAR},
+      ho_budget = #{hoBudget,jdbcType=DECIMAL},
+      pe_budget = #{peBudget,jdbcType=DECIMAL},
+      apply_budget = #{applyBudget,jdbcType=DECIMAL},
+      in_date = #{inDate,jdbcType=DATE},
+      number = #{number,jdbcType=VARCHAR},
+      reimbursement_ratio = #{reimbursementRatio,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      apply_username = #{applyUsername,jdbcType=VARCHAR},
+      apply_date = #{applyDate,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

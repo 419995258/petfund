@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wdkj.xyfund.dao.ContributionMapper" >
+  <resultMap id="BaseResultMap" type="com.wdkj.xyfund.entity.Contribution" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="info_id" property="infoId" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="contribution_type" property="contributionType" jdbcType="INTEGER" />
+    <result column="info_name" property="infoName" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, info_id, money, name, tel, pay_type, status, contribution_type, info_name, user_id, 
+    create_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wdkj.xyfund.entity.ContributionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_contribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_contribution
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_contribution
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wdkj.xyfund.entity.ContributionExample" >
+    delete from t_contribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wdkj.xyfund.entity.Contribution" useGeneratedKeys="true" keyProperty="id">
+    insert into t_contribution (info_id, money, 
+      name, tel, pay_type, 
+      status, contribution_type, info_name, 
+      user_id, create_time)
+    values (#{infoId,jdbcType=INTEGER}, #{money,jdbcType=DECIMAL}, 
+      #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{contributionType,jdbcType=INTEGER}, #{infoName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wdkj.xyfund.entity.Contribution" useGeneratedKeys="true" keyProperty="id">
+    insert into t_contribution
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="infoId != null" >
+        info_id,
+      </if>
+      <if test="money != null" >
+        money,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="contributionType != null" >
+        contribution_type,
+      </if>
+      <if test="infoName != null" >
+        info_name,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="infoId != null" >
+        #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="contributionType != null" >
+        #{contributionType,jdbcType=INTEGER},
+      </if>
+      <if test="infoName != null" >
+        #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_contribution
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.infoId != null" >
+        info_id = #{record.infoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.money != null" >
+        money = #{record.money,jdbcType=DECIMAL},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payType != null" >
+        pay_type = #{record.payType,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.contributionType != null" >
+        contribution_type = #{record.contributionType,jdbcType=INTEGER},
+      </if>
+      <if test="record.infoName != null" >
+        info_name = #{record.infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_contribution
+    set id = #{record.id,jdbcType=INTEGER},
+      info_id = #{record.infoId,jdbcType=INTEGER},
+      money = #{record.money,jdbcType=DECIMAL},
+      name = #{record.name,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      pay_type = #{record.payType,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      contribution_type = #{record.contributionType,jdbcType=INTEGER},
+      info_name = #{record.infoName,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    update t_contribution
+    <set >
+      <if test="infoId != null" >
+        info_id = #{infoId,jdbcType=INTEGER},
+      </if>
+      <if test="money != null" >
+        money = #{money,jdbcType=DECIMAL},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="contributionType != null" >
+        contribution_type = #{contributionType,jdbcType=INTEGER},
+      </if>
+      <if test="infoName != null" >
+        info_name = #{infoName,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    update t_contribution
+    set info_id = #{infoId,jdbcType=INTEGER},
+      money = #{money,jdbcType=DECIMAL},
+      name = #{name,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      contribution_type = #{contributionType,jdbcType=INTEGER},
+      info_name = #{infoName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=DATE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectCountFrequency" resultType="java.lang.Long" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    select 
+    count(id)
+    FROM t_contribution WHERE create_time &lt;= #{createTime,jdbcType=DATE} AND user_id = #{userId,jdbcType=INTEGER} AND contribution_type = 1
+  </select>
+  
+  <select id="selectCountMoney" resultType="java.lang.Long" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    select 
+    sum(money)
+    FROM t_contribution WHERE create_time &lt;= #{createTime,jdbcType=DATE} AND user_id = #{userId,jdbcType=INTEGER} AND contribution_type = 1
+  </select>
+  
+  <select id="selectCountChild" resultType="java.lang.Long" parameterType="com.wdkj.xyfund.entity.Contribution" >
+    select 
+    count(info_id)
+    FROM t_contribution WHERE create_time &lt;= #{createTime,jdbcType=DATE} AND user_id = #{userId,jdbcType=INTEGER} AND contribution_type = 1
+  </select>
+  <select id="selectLatestWithHead" resultMap="BaseResultMapSDL">
+  	SELECT 
+	  a.`id`,
+	  a.`name`,
+	  a.`money`,
+	  a.`create_time`,
+	  a.`info_name`,
+	  b.`icon_url` AS `head` 
+	FROM
+	  t_contribution a 
+	  LEFT JOIN t_user b 
+	    ON a.`user_id` = b.`id` 
+	ORDER BY a.`id` DESC
+  </select>
+  <resultMap id="BaseResultMapSDL" type="com.wdkj.xyfund.controller.vo.ContributionVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="money" property="money" jdbcType="DECIMAL" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="info_name" property="infoName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="head" property="head" jdbcType="VARCHAR" />
+    <!-- <result column="info_id" property="infoId" jdbcType="INTEGER" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="contribution_type" property="contributionType" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="head" property="head" jdbcType="VARCHAR" /> -->
+  </resultMap>
+</mapper>

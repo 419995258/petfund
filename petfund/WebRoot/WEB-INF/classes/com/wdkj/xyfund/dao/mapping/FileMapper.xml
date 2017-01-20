@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wdkj.xyfund.dao.FileMapper" >
+  <resultMap id="BaseResultMap" type="com.wdkj.xyfund.entity.File" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="fileurl" property="fileurl" jdbcType="VARCHAR" />
+    <result column="filetype" property="filetype" jdbcType="VARCHAR" />
+    <result column="size" property="size" jdbcType="BIGINT" />
+    <result column="bucket" property="bucket" jdbcType="VARCHAR" />
+    <result column="access_type" property="accessType" jdbcType="VARCHAR" />
+    <result column="file_status" property="fileStatus" jdbcType="BIT" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="stuus" property="stuus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, fileurl, filetype, size, bucket, access_type, file_status, user_id, type, 
+    stuus
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wdkj.xyfund.entity.FileExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from t_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_file
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_file
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wdkj.xyfund.entity.FileExample" >
+    delete from t_file
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wdkj.xyfund.entity.File" useGeneratedKeys="true" keyProperty="id">
+    insert into t_file (name, fileurl, 
+      filetype, size, bucket, 
+      access_type, file_status, user_id, 
+      type, stuus)
+    values (#{name,jdbcType=VARCHAR}, #{fileurl,jdbcType=VARCHAR}, 
+      #{filetype,jdbcType=VARCHAR}, #{size,jdbcType=BIGINT}, #{bucket,jdbcType=VARCHAR}, 
+      #{accessType,jdbcType=VARCHAR}, #{fileStatus,jdbcType=BIT}, #{userId,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{stuus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.wdkj.xyfund.entity.File" useGeneratedKeys="true" keyProperty="id">
+    insert into t_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+     
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="fileurl != null" >
+        fileurl,
+      </if>
+      <if test="filetype != null" >
+        filetype,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="bucket != null" >
+        bucket,
+      </if>
+      <if test="accessType != null" >
+        access_type,
+      </if>
+      <if test="fileStatus != null" >
+        file_status,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="stuus != null" >
+        stuus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileurl != null" >
+        #{fileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=BIGINT},
+      </if>
+      <if test="bucket != null" >
+        #{bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="accessType != null" >
+        #{accessType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        #{fileStatus,jdbcType=BIT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="stuus != null" >
+        #{stuus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_file
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileurl != null" >
+        fileurl = #{record.fileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.filetype != null" >
+        filetype = #{record.filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=BIGINT},
+      </if>
+      <if test="record.bucket != null" >
+        bucket = #{record.bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessType != null" >
+        access_type = #{record.accessType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileStatus != null" >
+        file_status = #{record.fileStatus,jdbcType=BIT},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuus != null" >
+        stuus = #{record.stuus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_file
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      fileurl = #{record.fileurl,jdbcType=VARCHAR},
+      filetype = #{record.filetype,jdbcType=VARCHAR},
+      size = #{record.size,jdbcType=BIGINT},
+      bucket = #{record.bucket,jdbcType=VARCHAR},
+      access_type = #{record.accessType,jdbcType=VARCHAR},
+      file_status = #{record.fileStatus,jdbcType=BIT},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=INTEGER},
+      stuus = #{record.stuus,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wdkj.xyfund.entity.File" >
+    update t_file
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fileurl != null" >
+        fileurl = #{fileurl,jdbcType=VARCHAR},
+      </if>
+      <if test="filetype != null" >
+        filetype = #{filetype,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=BIGINT},
+      </if>
+      <if test="bucket != null" >
+        bucket = #{bucket,jdbcType=VARCHAR},
+      </if>
+      <if test="accessType != null" >
+        access_type = #{accessType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileStatus != null" >
+        file_status = #{fileStatus,jdbcType=BIT},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="stuus != null" >
+        stuus = #{stuus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wdkj.xyfund.entity.File" >
+    update t_file
+    set name = #{name,jdbcType=VARCHAR},
+      fileurl = #{fileurl,jdbcType=VARCHAR},
+      filetype = #{filetype,jdbcType=VARCHAR},
+      size = #{size,jdbcType=BIGINT},
+      bucket = #{bucket,jdbcType=VARCHAR},
+      access_type = #{accessType,jdbcType=VARCHAR},
+      file_status = #{fileStatus,jdbcType=BIT},
+      user_id = #{userId,jdbcType=INTEGER},
+      type = #{type,jdbcType=INTEGER},
+      stuus = #{stuus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  
+  
+  <sql id="fileUrlFromPostulant" >
+    t1.id, t1.name, t1.fileurl, t1.filetype, t1.size, t1.bucket, t1.access_type, t1.file_status, t1.user_id, t1.type, 
+    t1.stuus
+  </sql>
+  
+  <sql id="fileUrlFromHelpApply" >
+    t1.id, t1.name, t1.fileurl, t1.filetype, t1.size, t1.bucket, t1.access_type, t1.file_status, t1.user_id, t1.type
+  </sql>
+  
+   <select id="selectFileUrlFromPostulantByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="fileUrlFromPostulant" />
+    from  t_postulant_files t LEFT JOIN t_file t1 ON t.file_id = t1.id WHERE t.postulant_id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <sql id="fileUrlFromHelp" >
+    t1.id, t1.name, t1.fileurl, t1.filetype, t1.size, t1.bucket, t1.access_type, t1.file_status, t1.user_id, t1.type, 
+    t1.stuus
+  </sql>
+  
+   <select id="selectFileUrlFromHelpByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="fileUrlFromPostulant" />
+    from  t_help_files t LEFT JOIN t_file t1 ON t.file_id = t1.id WHERE t.help_id = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <sql id="fileUrlFromLink" >
+    t1.id, t1.name, t1.fileurl, t1.filetype, t1.size, t1.bucket, t1.access_type, t1.file_status, t1.user_id, t1.type, 
+    t1.stuus
+  </sql>
+  
+   <select id="selectFileUrlFromLinkByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="fileUrlFromLink" />
+    from  t_link_files t LEFT JOIN t_file t1 ON t.file_id = t1.id WHERE t.link_id = #{id,jdbcType=INTEGER}
+  </select>
+ 
+ <select id="selectFileUrlFromHelpApp" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="fileUrlFromHelpApply" />
+    from  t_help_apply_files t LEFT JOIN t_file t1 ON t.file_id = t1.id WHERE t.help_apply_id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <!--  <sql id="fileUrlFromHelpApply" >
+   t1.id, t1.name, t1.fileurl,t.help_apply_id,t.file_id,t.type, t1.filetype, t1.size, t1.bucket, t1.access_type, t1.file_status, t1.user_id, t1.type, 
+    t1.stuus
+  </sql>
+  
+   <select id="selectFileUrlFromHelpApplyByTypeKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="fileUrlFromHelpApply" />
+    ft_help_apply_files t LEFT JOIN t_file t1 ON t.file_id = t1.id WHERE t.help_apply_id = #{id,jdbcType=INTEGER}
+  </select> -->
+  
+</mapper>
