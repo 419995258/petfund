@@ -45,7 +45,9 @@
 				        	<div class="caption_p">
 					        	<p ng-if="ifChoukuan">
 					        		<span ng-bind="x.childName"></span>，
-					        		<span ng-bind="x.sex"></span>，
+					        		<!-- <span ng-bind="x.sex"></span>， -->
+					        		<span ng-if="x.sex==1">雄性</span>
+									<span ng-if="x.sex==2">雌性</span>，
 					        		<span ng-bind="x.age"></span>岁，
 					        		<span ng-bind="x.place"></span>
 					        	</p>

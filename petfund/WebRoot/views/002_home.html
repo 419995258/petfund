@@ -129,8 +129,8 @@
 									<div class="caption_p">
 										<p>
 											<span ng-bind="helpTop1.childName"></span>，
-											<span ng-if="helpTop1.sex==1">男</span>
-											<span ng-if="helpTop1.sex==2">女</span>，
+											<span ng-if="helpTop1.sex==1">雄性</span>
+											<span ng-if="helpTop1.sex==2">雌性</span>，
 											<span ng-bind="helpTop1.age"></span>岁，
 											<span ng-bind="helpTop1.citynum"></span>
 										</p>
@@ -167,8 +167,8 @@
 							<div class="caption_p">
 								<p>
 									<span ng-bind="x.childName"></span>，
-									<span ng-if="x.sex==1">男</span>
-									<span ng-if="x.sex==2">女</span>,
+									<span ng-if="x.sex==1">雄性</span>
+									<span ng-if="x.sex==2">雌性</span>,
 									<span ng-bind="x.age"></span>岁，
 									<span ng-bind="x.cityNum"></span>
 								</p>
@@ -254,7 +254,7 @@
 									(总共发起<span ng-bind="x.initiateNum"></span>个项目)
 								</a>
 							</div>
-							<a ui-sref="contribute" class="btn btn-success" role="button"  ng-click='jk(x.id)'>我要捐款</a>
+							<!-- <a ui-sref="contribute" class="btn btn-success" role="button"  ng-click='jk(x.id)'>我要捐款</a> -->
 							</div>
 					</div>
 				</div>

@@ -38,8 +38,8 @@
 						        	<div class="caption_p">
 							        	<p ng-if="type==1">
 							        		<span ng-bind="projectChildItems.childName"></span>，
-											<span ng-if="projectChildItems.sex==1">男</span>
-											<span ng-if="projectChildItems.sex==2">女</span>,
+											<span ng-if="projectChildItems.sex==1">雄性</span>
+											<span ng-if="projectChildItems.sex==2">雌性</span>,
 							        		<span ng-bind="projectChildItems.age"></span>岁，
 							        		<span ng-bind="projectChildItems.cityNum"></span>
 							        	</p>
@@ -69,7 +69,7 @@
 							<ul class="nav nav-tabs">
 								<li role="presentation" class="active"><a href="#info1" data-toggle="tab">介绍</a></li>
 								<li role="presentation"><a href="#info2" data-toggle="tab" ng-show="type==1">病例</a></li>
-								<li role="presentation"><a href="#info3" data-toggle="tab" ng-show="type==1">父母感言</a></li>
+								<li role="presentation"><a href="#info3" data-toggle="tab" ng-show="type==1">评价</a></li>
 							</ul>
 						</div>
 							

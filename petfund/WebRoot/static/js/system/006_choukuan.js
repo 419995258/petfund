@@ -53,7 +53,7 @@ choukuanAppmodule.controller('choukuanController', function($scope, $http,
 			$('.menu_btn').removeClass('active');
 			$('#choukuan').addClass('active');
 		};
-		var queryTemp = [{'type':0,'name':'显示全部'},{'type':2,'name':'搜孩子姓名'},{'type':3,'name':'搜发起人'}];
+		var queryTemp = [{'type':0,'name':'显示全部'},{'type':2,'name':'搜宠物姓名'},{'type':3,'name':'搜发起人'}];
 		$scope.selectItems = queryTemp;
 		$scope.qureyType = queryTemp[0];
 		queryChouKuan();
