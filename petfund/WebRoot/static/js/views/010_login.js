@@ -8,7 +8,8 @@ loginAppmodule.controller('loginController', function($scope, $http, $rootScope,
 		if ($state.current.name == 'login') {
 			$('.qz_content > a').removeClass('active');
 			$('#btn_userCenter').addClass('active');
-		};
+		}
+		;
 	};
 	$scope.init();
 

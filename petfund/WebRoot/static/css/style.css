@@ -167,12 +167,15 @@ img{
 .phone_menu{
 	display: none;
 }
+.phone_menu a{
+	cursor: pointer;
+}
 
 body{
 	padding-top:0px;
 }
 
-/*@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
 	.header, .gg_box, .main_menu{
 		display: none;
 	}
@@ -197,7 +200,7 @@ body{
 		padding-top:50px;
 	}
 }
-*/
+
 
 .gg_box{
 	height:30px;
@@ -232,7 +235,7 @@ body{
 }
 
 .main_menu a{
-	width:25%;
+	width:16.66%;
 	display: inline-block;
 	text-align: center;
 	float:left;

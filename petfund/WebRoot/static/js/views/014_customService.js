@@ -14,7 +14,7 @@ customServiceAppmodule.controller('customServiceController', function($scope, $h
 	$scope.init = function() {		
 		if ($state.current.name == 'customService') {
 			$('.qz_content > a').removeClass('active');
-			$('#btn_about').addClass('active');
+			$('#btn_customService').addClass('active');
 			
 		};	
 		queryCustomService();

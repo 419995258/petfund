@@ -63,6 +63,40 @@
 </div>
 
 <div class="container qz_content">
+			<div class="row">
+				<div class="news_box col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<div class="thumbnail" id="newsTab">
+						<div class="news_title">
+							<ul class="nav nav-tabs news-ul">
+								<li role="presentation" class="active"><a ng-click="changeNews(1)" onclick="changeActiveNews(this)">新闻资讯</a></li>
+								<li role="presentation"><a  ng-click="changeNews(2)"  onclick="changeActiveNews(this)">媒体报道</a></li>
+							</ul>
+						</div>
+
+						<div class="tab-content">
+							<div class="tab-pane fade in active" id="news1" >
+								<div class="row">
+									<div class="news_box col-xs-12 col-sm-12 col-md-6 col-lg-6">
+										<!------------------------img------------------------------->
+										<div class="img_box_big">
+											<img ng-src={{fengmianUrl}} alt="..." ui-sref="news">
+										</div>
+									</div>
+									<!------------------------title---------------------------->
+									<div class="news_box col-xs-12 col-sm-12 col-md-6 col-lg-6" style="overflow: hidden; height: 250px;">
+										<div class="home_news" >
+											<a ng-repeat="x in newsShow" ng-click='newsContent($index)'>
+												<span class="news_label" ng-bind="x.title" ></span>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
 	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<!--紧急筹款-->

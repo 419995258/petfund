@@ -105,7 +105,67 @@
 	</head>
 
 	<body ng-app="indexApp" ng-controller="indexController">
+	<!-- 压缩后菜单 -->
+		<nav class="navbar navbar-inverse navbar-fixed-top phone_menu">
+			<div class="container">
+				<div class="container-fluid">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header">
+						<img alt="Brand" src="../static/img/logo.png" class="phone_logo">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	    </button>
+						<div class="logo"></div>
+					</div>
 
+					<!--折叠以后的菜单-->
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a ui-sref="home">首页</a>
+							</li>
+
+							<li>
+								 <a ng-click="clickOffer()" >我要奉献</a>
+							</li>
+
+							<li>
+								<a ui-sref="news">新闻中心</a>
+							</li>
+
+							<li>
+								<a ui-sref="about">关于仁爱基金</a>
+							</li>
+
+							<li>
+								<a ui-sref="customService">客服中心</a>
+							</li>
+
+							<li>
+								<a ng-click='checkLogin()' ui-sref="userCenterInfo">会员中心</a>
+							</li>
+
+							<li ng-if='!user.username'>
+								<a ui-sref="register">注册</a>
+							</li>
+							<li ng-if='!user.username'>
+								<a ng-click="checkLogin()">登录</a>
+							</li>
+							<li ng-if='user.username'>
+								<a ng-click="loginOut()">退出</a>
+							</li>
+						
+						</ul>
+
+					</div>
+					<!-- /.navbar-collapse -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+		</nav>
 		
 
 		<div class="header">
@@ -118,7 +178,7 @@
 							<img border="0" src="http://wpa.qq.com/pa?p=2:419995258:51"alt="在线客服" title="在线客服" s/>
 						</a>
 						<a ng-if='!user.username' ui-sref="register">注册</a>
-						<a ng-if='!user.username'ng-click="checkLogin()">登录</a>
+						<a ng-if='!user.username' ng-click="checkLogin()">登录</a>
 						<a ng-if='user.username' ng-click="loginOut()">退出</a>
 					</div>
 				</div>
@@ -143,8 +203,8 @@
 				<a onclick="changeActive(this)" id="btn_offer" ng-click="clickOffer()">我要奉献</a>
 				<a onclick="changeActive(this)" id="btn_news" ui-sref="news" >新闻中心</a>
 				<a onclick="changeActive(this)" id="btn_about" ui-sref="about">关于仁爱基金</a>
-				<a onclick="changeActive(this)" id="btn_open" ui-sref="customService">客服中心</a>
-				<a   ng-click='checkLogin(this)' id="btn_userCenter">会员中心</a>
+				<a onclick="changeActive(this)" id="btn_customService" ui-sref="customService">客服中心</a>
+				<a   ng-click="checkLogin(this)" id="btn_userCenter" ui-sref="userCenter">会员中心</a>
 			</div>
 		</div>
 
