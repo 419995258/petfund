@@ -267,7 +267,7 @@ homeAppmodule.controller('homeController', function($scope, $http, $rootScope, $
 	$scope.bannerImgs=[];
 
 
-	$scope.bannerImgs=['../static/img/banner2.jpg','../static/img/banner3.jpg'];
+	$scope.bannerImgs=['../static/img/banner4.jpg','../static/img/banner5.jpg'];
 
 	$scope.newsImgs=[];//首页四种新闻图片
 	$scope.newsImgs=['../static/img/news.jpg','../static/img/01.jpg','../static/img/02.jpg','../static/img/03.jpg'];
