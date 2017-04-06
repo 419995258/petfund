@@ -51,7 +51,8 @@
 							        		(总共发起<span ng-bind="projectChildItems.initiateNum"></span>个项目)
 							        	</span>
 						        	</div>
-						        	<a ui-sref="contribute" class="btn btn-success" role="button"  ng-click='jk(projectChildItems.id)'>我要捐款</a>
+						        	<a ui-sref="contribute" class="btn btn-success" role="button"  ng-click='jk(projectChildItems.id)' ng-show="type==1">我要捐款</a>
+						        	<a href="http://wpa.qq.com/msgrd?v=3&uin=1524846810&site=qq&menu=yes" class="btn btn-success" role="button"   ng-show="type!=1">我要领养</a>
 					      		</div>
 				    	
 							</div>

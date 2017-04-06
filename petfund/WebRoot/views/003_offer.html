@@ -34,7 +34,7 @@
 							<img src="{{x.fileurl}}" ui-sref="project" ng-click="dt(x.id)">
 						</div>
 						
-						<div class="progress">
+						<div class="progress" ng-if="x.type==1">
 						  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:{{((x.moneyOff)/x.money)*100}}%">
 						    <span class="wcb">{{((x.moneyOff)/x.money)*100 | number:1}}%</span>
 						  </div>
@@ -51,9 +51,9 @@
 					        		<span ng-bind="x.age"></span>岁，
 					        		<span ng-bind="x.place"></span>
 					        	</p>
-					        	<p>目标： <span class="orange_text" ng-bind="x.money"></span>元</p>
-					        	<p>还需： <span class="orange_text" ng-bind="x.money-x.moneyOff"></span>元</p>
-					        	<p>累计捐款 ：<span ng-bind="x.total"></span>人次</p>
+					        	<p ng-if="x.type==1">目标： <span class="orange_text" ng-bind="x.money"></span>元</p>
+					        	<p ng-if="x.type==1">还需： <span class="orange_text" ng-bind="x.money-x.moneyOff"></span>元</p>
+					        	<p ng-if="x.type==1">累计捐款 ：<span ng-bind="x.total"></span>人次</p>
 					        	<a class="fqr_btn">
 					        		发起人 ：<span ng-bind="x.personName"></span>
 					        		(总共发起<span ng-bind="x.initiateNum"></span>个项目)
