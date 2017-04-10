@@ -27,6 +27,10 @@ contributeAppmodule.controller('contributeController', function($scope, $http, $
         }).error(function (response) {
         });
 	}
+	$scope.develop = function(){
+		$('#imgModal').modal('show');
+		//alert(../static/img/qr.png);
+	}
 	
 	$scope.init();
 	

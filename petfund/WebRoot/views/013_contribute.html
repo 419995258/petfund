@@ -94,13 +94,31 @@
 				    <div class="caption_p">
 				 		<h5>请选择付款方式：</h5>
 				 		<span class="zfBtn apliy zfSelected" onclick="changeZf(this)" ng-click="onChange(1)"></span>
-				 		<span class="zfBtn weixin" onclick="changeZf(this)" ng-click="onChange(2)"></span>				 		
+				 		<!-- <span class="zfBtn weixin" onclick="changeZf(this)" ng-click="onChange(2)"></span>		 -->		 		
 				 	</div>
 				</div>
 			</div>
 			
-			<input ng-click="subZf()" type="button" class="btn btn-success btn-lg" value="确认支付" style="width:100%; margin-bottom: 50px;" />
+			<!-- <input ng-click="subZf()" type="button" class="btn btn-success btn-lg" value="确认支付" style="width:100%; margin-bottom: 50px;" /> -->
+			<input ng-click="develop()" type="button" class="btn btn-success btn-lg" value="确认支付" style="width:100%; margin-bottom: 50px;" />
 		</div>
+		
+		<!-- img -->
+	<div class="modal fade" id="imgModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" data-backdrop="static">
+		<div class="modal-dialog modal-lg" role="document"
+			style="width:200px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title">&nbsp;&nbsp;&nbsp;支付宝支付</h4>
+					<img alt="支付宝付款" src="../static/img/qr.png"></img>
+				</div>
+			</div>
+		</div>
+	</div>
 	</div>
 </div>
 <script>
