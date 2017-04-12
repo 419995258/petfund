@@ -58,7 +58,7 @@
 			<tr>
 				<th>发布时间</th>
 				<th>项目名</th>
-				<th>病名</th>
+				
 				<th>发起人</th>
 				<th>操作</th>
 			</tr>
@@ -66,7 +66,7 @@
 			<tr ng-repeat="x in projectChildItemsMini">
 				<td><span ng-bind="x.createTimeStr"></span></td>
 				<td><span ng-bind="x.title"></span></td>
-				<td><span ng-bind="x.childName"></span></td>
+				
 				<td><span ng-bind="x.personName"></span></td>
 				<td>
 					<button type="button" class="btn btn-warning btn-sm"
@@ -114,21 +114,7 @@
 								</div>
 							</div>
 
-							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
-								<label for="inputPassword3" class="col-sm-4 control-label">病名</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										ng-model="projectChildItems.childName" />
-								</div>
-							</div>
-
-							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
-								<label for="inputPassword3" class="col-sm-4 control-label">目标金额</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										ng-model="projectChildItems.money" />
-								</div>
-							</div>
+							
 
 							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
 								<label for="inputPassword3" class="col-sm-4 control-label">发起人</label>
@@ -141,13 +127,7 @@
 								</div>
 							</div>
 
-							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
-								<label for="inputPassword3" class="col-sm-4 control-label">完成金额</label>
-								<div class="col-sm-8">
-									<input type="text" class="form-control"
-										ng-model="projectChildItems.moneyOff" />
-								</div>
-							</div>
+							
 							
 							
 						

@@ -259,18 +259,15 @@ huijuAppmodule.controller('huijuController', function($scope, $http, $rootScope,
 		};
 		
 		if (verifyIsNull($scope.projectChildItems.childName)) {
-			alert("请填写病名");
-			return;
+			$scope.projectChildItems.childName = "";
 		};
 		
 		if (verifyIsNull($scope.projectChildItems.money)) {
-			alert("请填写目标金额");
-			return;
+			$scope.projectChildItems.money = 0;
 		};
 		
 		if (verifyIsNull($scope.projectChildItems.moneyOff)) {
-			alert("请填写完成金额");
-			return;
+			$scope.projectChildItems.moneyOff = 0;
 		};
 		
 	
