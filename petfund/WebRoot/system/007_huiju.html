@@ -24,7 +24,7 @@
 <body>
 
 	<nav class="navbar navbar-default">
-		<span class="navbar-brand">将爱汇聚</span>
+		<span class="navbar-brand">领养中心</span>
 
 		<form class="navbar-form navbar-right">
 			<button type="button" class="btn btn-success btn-default"
@@ -99,7 +99,7 @@
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
 					</button>
-					<h4 class="modal-title">编辑求助信息</h4>
+					<h4 class="modal-title">编辑领养信息</h4>
 				</div>
 
 				<div class="modal-body">
@@ -127,7 +127,23 @@
 								</div>
 							</div>
 
-							
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputEmail3" class="col-sm-4 control-label">性别</label>
+								<div class="col-sm-8">
+									<select class="form-control color9" ng-model="projectChildItems.sex">
+										<option  value="1" ng-selected="projectChildItems.sex==1" >雄性</option>
+										<option value="2" ng-selected="projectChildItems.sex==2">雌性</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group col-xs-12 col-sm-12 col-md-12 col-lg-6">
+								<label for="inputPassword3" class="col-sm-4 control-label">年龄</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control"
+										ng-model="projectChildItems.age" />
+								</div>
+							</div>
 							
 							
 						
