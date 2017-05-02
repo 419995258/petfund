@@ -191,7 +191,7 @@
 			<div class="row">
 				<div class="news_box col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<div class="title_box">
-						<div class="title">将爱汇聚</div>
+						<div class="title">领养中心</div>
 						<span class="more_btn" ui-sref="offer" onclick="changeActive('#btn_offer')" ng-click="clickOffer(2)">更多</span>
 					</div>
 				</div>
@@ -216,6 +216,10 @@
 								<div class="caption">
 									<h3 ui-sref="project" ng-click="dt(helpTop2.id)" ng-bind="helpTop2.title"></h3>
 									<div class="caption_p">
+									<p>姓名： <span class="orange_text" ng-bind="helpTop2.childName"></span></p>
+									<p>性别： <span class="orange_text" ng-if="x.sex==1">雄性</span>
+											<span class="orange_text" ng-if="x.sex==2">雌性</span>
+									</p>
 									<!-- 	<p>目标： <span class="orange_text" ng-bind="helpTop2.money"></span>元</p>
 										<p>还需： <span class="orange_text" ng-bind="helpTop2.moneyNeed"></span>元</p>
 										<p>累计捐款 ：<span ng-bind="helpTop2.total"></span>人次</p> -->
@@ -246,6 +250,10 @@
 						<div class="caption">
 							<h3 ui-sref="project" ng-click="dt(x.id)" ng-bind="x.title"></h3>
 							<div class="caption_p">
+								<p>姓名： <span class="orange_text" ng-bind="helpTop2.childName"></span></p>
+								<p>性别： <span class="orange_text" ng-if="x.sex==1">雄性</span>
+										<span class="orange_text" ng-if="x.sex==2">雌性</span>
+								</p>
 								<!-- <p>目标： <span class="orange_text" ng-bind="x.money"></span>元</p>
 								<p>还需： <span class="orange_text" ng-bind="x.moneyNeed"></span>元</p>
 								<p>累计捐款 ：<span ng-bind="x.total"></span>人次</p> -->
