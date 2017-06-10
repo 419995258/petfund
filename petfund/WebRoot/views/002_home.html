@@ -217,8 +217,8 @@
 									<h3 ui-sref="project" ng-click="dt(helpTop2.id)" ng-bind="helpTop2.title"></h3>
 									<div class="caption_p">
 									<p>姓名： <span class="orange_text" ng-bind="helpTop2.childName"></span></p>
-									<p>性别： <span class="orange_text" ng-if="x.sex==1">雄性</span>
-											<span class="orange_text" ng-if="x.sex==2">雌性</span>
+									<p>性别： <span class="orange_text" ng-if="helpTop2.sex==1">雄性</span>
+											<span class="orange_text" ng-if="helpTop2.sex==2">雌性</span>
 									</p>
 									<!-- 	<p>目标： <span class="orange_text" ng-bind="helpTop2.money"></span>元</p>
 										<p>还需： <span class="orange_text" ng-bind="helpTop2.moneyNeed"></span>元</p>
@@ -250,7 +250,7 @@
 						<div class="caption">
 							<h3 ui-sref="project" ng-click="dt(x.id)" ng-bind="x.title"></h3>
 							<div class="caption_p">
-								<p>姓名： <span class="orange_text" ng-bind="helpTop2.childName"></span></p>
+								<p>姓名： <span class="orange_text" ng-bind="x.childName"></span></p>
 								<p>性别： <span class="orange_text" ng-if="x.sex==1">雄性</span>
 										<span class="orange_text" ng-if="x.sex==2">雌性</span>
 								</p>
